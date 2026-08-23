@@ -57,6 +57,8 @@ This niche carries **more regulatory exposure than a pillow**: it's a light-emit
 ## Windows / environment gotchas (this machine)
 
 - **Poppler (`pdftoppm`) installed 2026-08-23 via `winget install oschwartz10612.Poppler`** to enable reading the image-only PDFs in `swipe/` and `sourcing/`. Winget updated the user PATH, but the already-running Claude Code process (and its Bash tool subprocess) doesn't pick that up until the session/app is restarted. **If `Read` on a PDF still errors with "pdftoppm is not installed," that's this — ask the user to restart Claude Code, not to reinstall anything.**
+  - **Confirmed still true as of 2026-08-23** (later in the same day, still same un-restarted session): `Read` on a PDF with `pages` still fails with the same error, and `where pdftoppm` still resolves to nothing in Bash.
+  - **Workaround that doesn't require a restart:** call the poppler binaries by their full install path directly — `/c/Users/jomat_nweuhlk/AppData/Local/Microsoft/WinGet/Packages/oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe/poppler-25.07.0/Library/bin/pdftoppm.exe` (same dir has `pdftotext.exe`, `pdfinfo.exe`, etc.). Render the PDF to a PNG with `pdftoppm.exe -r 150 -png <pdf> <output-prefix>`, then — since these image-only PDFs are usually one very tall page (a full-page web capture, easily 10,000+ px tall) — split it into ~1500-1600px-tall crops with Pillow (`pip`/already-available `PIL`) before handing individual crops to `Read`; a single 12,000px-tall image is too tall to read usefully in one shot. `pdftotext.exe -layout` confirmed these FireShot captures have **no text layer** (0 bytes out) — image rendering is the only way to read them, there's no OCR shortcut here.
 - No `python-docx` / `pandoc` installed. The four foundational `.docx` files were converted to Markdown by a one-off stdlib script (`zipfile` + `xml.etree.ElementTree` pulling `word/document.xml`) run from the scratchpad, not checked into this repo. If more `.docx` files show up, either write the same kind of script again or ask the user to install `pandoc`.
 - Node v24.13.1, npm 11.8.0, Shopify CLI 4.7.0, `shopify-ai-toolkit` plugin v1.7.0 — verified 2026-08-23.
 
@@ -66,9 +68,13 @@ Applies once theme work starts (no theme exists yet — see "Session objectives"
 
 - **Invoke the `frontend-design` skill** before writing or restyling any theme section/template, every session, no exceptions — it's the guidance for aesthetic direction and avoiding templated-default choices. Pull in the relevant `shopify-plugin:shopify-liquid` skill for Liquid-specific correctness.
 - **Always preview from a live server, never a static file.** Use `shopify theme dev --store gcvy0q-cb.myshopify.com --theme <motithera-draft-theme-id>` (Shopify's live-reload preview, default `http://127.0.0.1:9292`) — this is the Shopify-theme equivalent of Flove's `node serve.mjs`. Start it in the background before taking screenshots; don't start a second instance if one's already running.
-- **Screenshot workflow:** Puppeteer is **not yet installed on this machine** — install it (`npm install puppeteer` in a scratch/tooling location, or globally) the first time this is actually needed, and record where in this file once done. Once installed: screenshot the live-reload URL, then read the PNG with the `Read` tool and analyze it directly — don't just trust the Liquid diff.
+- **Screenshot workflow — installed and working as of 2026-08-23:**
+  - Puppeteer is a **local project dependency** (`npm install puppeteer` ran in project root — see `package.json` / `node_modules/`, not global). Its bundled Chrome lives in the normal cache at `~/.cache/puppeteer/` (`chrome/`, `chrome-headless-shell/`).
+  - `screenshot.mjs` (project root) is the runner: `node screenshot.mjs <url> [label]`. Smoke-tested against `https://example.com` — works end-to-end.
+  - Saves to `./temporary screenshots/screenshot-N[-label].png` (git-ignored via `.gitignore`), auto-incrementing, never overwriting.
+  - Point it at the `shopify theme dev` live-reload URL once that's running. After screenshotting, read the PNG with the `Read` tool and analyze it directly — don't just trust the Liquid diff.
+  - Note: an earlier attempt installed Puppeteer **globally** and tried `NODE_PATH` to make a plain `node screenshot.mjs` find it — that doesn't work, Node's ESM resolver ignores `NODE_PATH`. Fixed by doing a normal local install instead (`npm init -y` + `npm install puppeteer` in project root) and removing the global copy. If Puppeteer ever seems "missing" despite being installed, check it's the local copy being resolved, not a global one.
 - **Do at least 2 comparison rounds** (before/after, or against the swipe file in `swipe/`) per visual change. Stop only when no visible differences remain against intent.
-- Screenshots go to a `temporary screenshots/` folder at project root (git-ignored) — never overwrite, always increment.
 
 ## Design system guardrails
 
@@ -96,12 +102,15 @@ README.md               project index
 PROGRESS.md             audit log of every store mutation / meaningful file change
 brand/                   avatar, beliefs, (BRAND_GUIDE.md once identity is locked)
 brand/assets/            logo, color guide, product photos — check before using placeholders
+brand/assets/placeholders/  AI-generated (Higgsfield) product image placeholders — not real photography, swap before publish
 offer/                   offer brief, funnel/positioning strategy
 research/                market research & voice-of-customer dossier
 sourcing/                Alibaba supplier screenshots — read before finalizing product specs
 swipe/                   competitor landing pages to swipe structure/format from (Kineon)
 theme/                   (not created yet — added once a theme is duplicated for MotiThera)
-temporary screenshots/   visual-verification screenshots (git-ignored, not created yet)
+screenshot.mjs           Puppeteer screenshot runner — node screenshot.mjs <url> [label]
+package.json / node_modules/  local Puppeteer install (npm install puppeteer already run)
+temporary screenshots/   visual-verification screenshots (git-ignored)
 ```
 
 ## Session objectives (current)

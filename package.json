@@ -1,0 +1,24 @@
+{
+  "name": "motithera",
+  "version": "1.0.0",
+  "description": "DTC Shopify project for MotiThera Neck Relax — a wearable neck massager (heat, vibration massage, low-frequency pulse modes, soft red light) for chronic neck/trap tension in desk workers. Not a puppeteer-only project — this package.json exists to support the Puppeteer visual-verification workflow in CLAUDE.md.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Imanonameandyou/motithera.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Imanonameandyou/motithera/issues"
+  },
+  "homepage": "https://github.com/Imanonameandyou/motithera#readme",
+  "dependencies": {
+    "puppeteer": "^25.8.0"
+  }
+}

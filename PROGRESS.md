@@ -4,7 +4,14 @@ Audit log of every API call and file change made to the store or this project. N
 
 ---
 
-## 2026-08-23 — Frontend workflow conventions
+## 2026-08-23 — Product sourcing read + draft listing prepared (store creation still blocked)
+
+- Read the full Alibaba sourcing PDF (`sourcing/FireShot Capture 022...`) by rendering it directly via poppler's full install path (winget PATH still not live in this session — see `CLAUDE.md` gotchas) and splitting the resulting ~12,800px-tall page image into crops with Pillow.
+- **Finding: the sourced device (Create Top Electronics, model `JT-8B`) does not match the offer brief's clinical-PBM claims.** It's an EMS/TENS pulse + 42°C heat + vibration neck massager with "mild red light" (no stated wavelength/irradiance), certified FCC/CE/RoHS only (safety/EMC, not medical). Flagged to user; user chose to rewrite listing copy to match the real spec sheet rather than ship the offer brief's 660nm/850nm/clinical-irradiance language.
+- Installed Puppeteer (first globally, then correctly as a local project dependency after discovering `NODE_PATH` doesn't work with Node's ESM resolver) — `screenshot.mjs` added and smoke-tested against `https://example.com`, works end to end. Details in `CLAUDE.md` → "Frontend / visual verification workflow."
+- Generated 3 placeholder product images via Higgsfield (`recraft_v4_1`, model_type `utility`, 2k) per user's request, since no real product photography exists yet. Saved to `brand/assets/placeholders/` with a README flagging them as AI-generated, not real photos, to be replaced before publish.
+- Drafted (not yet created) a MotiThera product listing built only from verified sourcing-PDF specs: heat, 4-node vibration massage, low-frequency pulse modes, soft red light, USB-C rechargeable, flexible hands-free fit — plus an explicit "not a medical device" disclaimer line. Price $499.00 / compare-at $699.00 per user. Status would be Draft per rule 3.
+- **Not yet executed — still blocked on Shopify auth.** `~/.config/shopify` still doesn't exist on this machine as of this entry. No `shopify store auth` or `store execute` call has been made.
 
 - Reviewed a frontend-focused `CLAUDE.md` from a prior project (Flove) the user uploaded, to see what was worth porting over. Kept: the local-server-before-screenshot discipline (adapted from a static-file `node serve.mjs` setup to Shopify's `shopify theme dev`), the "check `brand/assets/` before using placeholders" convention, and a design-guardrails section framework (left unpopulated — no `brand/BRAND_GUIDE.md` yet). Dropped: the verbatim-copy-phrasing rule, per user.
 - Added `## Frontend / visual verification workflow`, `## Design system guardrails`, and `## Brand assets` sections to `CLAUDE.md`.
