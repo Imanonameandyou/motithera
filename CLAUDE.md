@@ -60,6 +60,33 @@ This niche carries **more regulatory exposure than a pillow**: it's a light-emit
 - No `python-docx` / `pandoc` installed. The four foundational `.docx` files were converted to Markdown by a one-off stdlib script (`zipfile` + `xml.etree.ElementTree` pulling `word/document.xml`) run from the scratchpad, not checked into this repo. If more `.docx` files show up, either write the same kind of script again or ask the user to install `pandoc`.
 - Node v24.13.1, npm 11.8.0, Shopify CLI 4.7.0, `shopify-ai-toolkit` plugin v1.7.0 — verified 2026-08-23.
 
+## Frontend / visual verification workflow
+
+Applies once theme work starts (no theme exists yet — see "Session objectives"). Adapted from a screenshot-driven QA workflow used on a prior project; the mechanics differ because this is a Shopify theme, not a static HTML file.
+
+- **Invoke the `frontend-design` skill** before writing or restyling any theme section/template, every session, no exceptions — it's the guidance for aesthetic direction and avoiding templated-default choices. Pull in the relevant `shopify-plugin:shopify-liquid` skill for Liquid-specific correctness.
+- **Always preview from a live server, never a static file.** Use `shopify theme dev --store gcvy0q-cb.myshopify.com --theme <motithera-draft-theme-id>` (Shopify's live-reload preview, default `http://127.0.0.1:9292`) — this is the Shopify-theme equivalent of Flove's `node serve.mjs`. Start it in the background before taking screenshots; don't start a second instance if one's already running.
+- **Screenshot workflow:** Puppeteer is **not yet installed on this machine** — install it (`npm install puppeteer` in a scratch/tooling location, or globally) the first time this is actually needed, and record where in this file once done. Once installed: screenshot the live-reload URL, then read the PNG with the `Read` tool and analyze it directly — don't just trust the Liquid diff.
+- **Do at least 2 comparison rounds** (before/after, or against the swipe file in `swipe/`) per visual change. Stop only when no visible differences remain against intent.
+- Screenshots go to a `temporary screenshots/` folder at project root (git-ignored) — never overwrite, always increment.
+
+## Design system guardrails
+
+**Not yet populated — `brand/BRAND_GUIDE.md` doesn't exist yet** (name/price/offer are locked per the offer brief, but visual identity is not). Once it's locked, fill this section in with the same specificity as the rest of this file:
+
+- Exact hex values for background/surface/border/accent/CTA — not "a purple accent," the literal hex.
+- The exact font pairing (heading vs. body) and why they're paired.
+- What's explicitly forbidden: default Tailwind/framework palette colors, `transition-all`, flat default shadows, generic wellness-brand pastels/mint — whatever this brand's anti-pattern list turns out to be once the identity is chosen.
+- Required interactive states (hover/focus-visible/active) for every clickable element.
+- Spacing/shadow/depth tokens, once decided, rather than ad hoc Tailwind steps.
+
+Until this section is filled in, don't invent brand colors/fonts on the fly — ask, or point to a competitor/swipe reference and confirm before locking anything in.
+
+## Brand assets
+
+- **Check `brand/assets/` before designing anything.** If a logo, color guide, product photo, or other real asset exists there, use it — don't reach for a placeholder image or an invented color when a real asset is available.
+- If `brand/assets/` is empty (it is, as of 2026-08-23), fall back to placeholders (`https://placehold.co/WIDTHxHEIGHT`) and flag in the response that a real asset would improve the result.
+
 ## File layout
 
 ```
@@ -68,11 +95,13 @@ SHOPIFY_BOOTSTRAP.md    reusable environment-setup runbook (generic, not MotiThe
 README.md               project index
 PROGRESS.md             audit log of every store mutation / meaningful file change
 brand/                   avatar, beliefs, (BRAND_GUIDE.md once identity is locked)
+brand/assets/            logo, color guide, product photos — check before using placeholders
 offer/                   offer brief, funnel/positioning strategy
 research/                market research & voice-of-customer dossier
 sourcing/                Alibaba supplier screenshots — read before finalizing product specs
 swipe/                   competitor landing pages to swipe structure/format from (Kineon)
 theme/                   (not created yet — added once a theme is duplicated for MotiThera)
+temporary screenshots/   visual-verification screenshots (git-ignored, not created yet)
 ```
 
 ## Session objectives (current)

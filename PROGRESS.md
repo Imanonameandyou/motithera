@@ -4,6 +4,13 @@ Audit log of every API call and file change made to the store or this project. N
 
 ---
 
+## 2026-08-23 — Frontend workflow conventions
+
+- Reviewed a frontend-focused `CLAUDE.md` from a prior project (Flove) the user uploaded, to see what was worth porting over. Kept: the local-server-before-screenshot discipline (adapted from a static-file `node serve.mjs` setup to Shopify's `shopify theme dev`), the "check `brand/assets/` before using placeholders" convention, and a design-guardrails section framework (left unpopulated — no `brand/BRAND_GUIDE.md` yet). Dropped: the verbatim-copy-phrasing rule, per user.
+- Added `## Frontend / visual verification workflow`, `## Design system guardrails`, and `## Brand assets` sections to `CLAUDE.md`.
+- Created `brand/assets/` (empty, with a README) and `.gitignore` (ignoring `temporary screenshots/`, which doesn't exist yet).
+- Puppeteer is **not installed** on this machine — noted in `CLAUDE.md` to install when theme work actually starts, not preemptively.
+
 ## 2026-08-23 — Environment bootstrap
 
 - Confirmed environment: Node v24.13.1, npm 11.8.0, Shopify CLI 4.7.0, `shopify-ai-toolkit` plugin v1.7.0 installed (user scope).

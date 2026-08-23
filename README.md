@@ -14,6 +14,7 @@ Start with [`CLAUDE.md`](CLAUDE.md) for standing rules, store access, and curren
 | [`research/MARKET_RESEARCH_DOSSIER.md`](research/MARKET_RESEARCH_DOSSIER.md) | Full voice-of-customer research dossier (long — grep it) |
 | [`sourcing/`](sourcing/) | Alibaba supplier screenshot for the candidate device |
 | [`swipe/`](swipe/) | Kineon (kineon.io) competitor landing page to reference for structure/format |
+| [`brand/assets/`](brand/assets/) | Real logo/color-guide/product-photo files, once available — check here before using placeholders |
 
 Original `.docx` files are kept alongside their Markdown companions in `brand/`, `offer/`, and `research/` for editing in Word if needed — the `.md` files are the working reference copies.
 
