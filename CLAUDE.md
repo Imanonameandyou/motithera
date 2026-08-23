@@ -80,15 +80,15 @@ Applies once theme work starts (no theme exists yet — see "Session objectives"
 
 ## Design system guardrails
 
-**Not yet populated — `brand/BRAND_GUIDE.md` doesn't exist yet** (name/price/offer are locked per the offer brief, but visual identity is not). Once it's locked, fill this section in with the same specificity as the rest of this file:
+**Locked 2026-08-23 — full spec in [`brand/BRAND_GUIDE.md`](brand/BRAND_GUIDE.md).** Identity direction: "Clinical Authority" — cool ink-on-porcelain, one restrained accent, tight radii, spec-sheet precision (the visual argument for why $499 is correct next to a $50 Amazon belt). Read the full doc before any theme/section work; quick reference:
 
-- Exact hex values for background/surface/border/accent/CTA — not "a purple accent," the literal hex.
-- The exact font pairing (heading vs. body) and why they're paired.
-- What's explicitly forbidden: default Tailwind/framework palette colors, `transition-all`, flat default shadows, generic wellness-brand pastels/mint — whatever this brand's anti-pattern list turns out to be once the identity is chosen.
-- Required interactive states (hover/focus-visible/active) for every clickable element.
-- Spacing/shadow/depth tokens, once decided, rather than ad hoc Tailwind steps.
+- **Colors:** ink `#14202E` (text), porcelain `#FAF9F6` (bg), mist `#EEF2F3` (secondary surface), clay `#C1502E`/`#A43F22`/`#832F19` (primary accent + hover/active — also doubles as the error color), steel `#4C6B7A`/`#38505C` (secondary accent — links, kickers, diagrams). Two accents only, never a third hue.
+- **Type:** Inter only, headings and body both — varying weight (400–800), not family. Full scale in the guide.
+- **Forbidden:** default Tailwind palette colors, neon/alarm red, pastel wellness mint/lavender/blush, any radius above 6px (no pills/full-rounding), floating "soft UI" shadows, `transition: all`, gradients, soft-focus golden-hour lifestyle stock photography. Full list + rationale in the guide.
+- **States:** every clickable element needs default/hover/active/focus-visible/disabled defined — see the guide's "Interactive states" section, don't ship hover-only.
+- Drop-in CSS custom-properties block is at the bottom of the guide — paste directly into the theme once one exists.
 
-Until this section is filled in, don't invent brand colors/fonts on the fly — ask, or point to a competitor/swipe reference and confirm before locking anything in.
+The guide's example copy is deliberately spec-accurate (heat/pulse/red-light, not clinical PBM) per "Claim integrity" below — don't let old offer-brief language leak back in via a copy-pasted example.
 
 ## Brand assets
 
@@ -102,7 +102,7 @@ CLAUDE.md              this file
 SHOPIFY_BOOTSTRAP.md    reusable environment-setup runbook (generic, not MotiThera-specific)
 README.md               project index
 PROGRESS.md             audit log of every store mutation / meaningful file change
-brand/                   avatar, beliefs, (BRAND_GUIDE.md once identity is locked)
+brand/                   avatar, beliefs, BRAND_GUIDE.md (visual identity, locked 2026-08-23)
 brand/assets/            logo, color guide, product photos — check before using placeholders
 brand/assets/placeholders/  AI-generated (Higgsfield) product image placeholders — not real photography, swap before publish
 offer/                   offer brief, funnel/positioning strategy

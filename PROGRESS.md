@@ -4,6 +4,14 @@ Audit log of every API call and file change made to the store or this project. N
 
 ---
 
+## 2026-08-23 — Brand visual identity locked
+
+- Presented 5 typography + color identity directions as an artifact (Clinical Authority, Quiet Luxury Spa, Modern Wellness Tech, Heritage Apothecary, Boutique Feminine Premium), each demonstrated with real product copy and named premium-brand parallels. User picked **Clinical Authority**.
+- Created `brand/BRAND_GUIDE.md`: full color system (ink/porcelain/mist neutrals, clay accent, steel secondary accent, semantic success/warning/error), Inter-only type scale, spacing/radius/shadow/motion tokens, required interactive states (default/hover/active/focus-visible/disabled) per component, a forbidden/anti-patterns list, imagery guidance, and a drop-in CSS custom-properties block.
+- Example copy in the guide deliberately uses the verified heat/pulse/red-light spec (not the offer brief's unverified 660nm/850nm clinical-PBM claims), consistent with the claim-integrity finding logged below.
+- Updated `CLAUDE.md` → "Design system guardrails" (now points to the guide instead of "not yet populated") and the file-layout table.
+- No store data touched — file/repo changes only.
+
 ## 2026-08-23 — First MotiThera product created (draft)
 
 - **Auth resolved.** User ran `shopify auth login` + `shopify store auth --store gcvy0q-cb.myshopify.com --scopes write_products,read_products` in their own terminal. Verified with a read-only `shopify store info` call. Correction to earlier notes: Shopify CLI session/store auth on this Windows machine is **not** under `~/.config/shopify` (that path never existed) — it's under `%APPDATA%\shopify-cli-kit-nodejs\Config\config.json` and `%APPDATA%\shopify-cli-store-nodejs\Config\config.json`. Updating `CLAUDE.md`.
