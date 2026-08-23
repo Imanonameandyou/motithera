@@ -4,6 +4,15 @@ Audit log of every API call and file change made to the store or this project. N
 
 ---
 
+## 2026-08-23 — First MotiThera product created (draft)
+
+- **Auth resolved.** User ran `shopify auth login` + `shopify store auth --store gcvy0q-cb.myshopify.com --scopes write_products,read_products` in their own terminal. Verified with a read-only `shopify store info` call. Correction to earlier notes: Shopify CLI session/store auth on this Windows machine is **not** under `~/.config/shopify` (that path never existed) — it's under `%APPDATA%\shopify-cli-kit-nodejs\Config\config.json` and `%APPDATA%\shopify-cli-store-nodejs\Config\config.json`. Updating `CLAUDE.md`.
+- Used the `shopify-plugin:shopify-admin` skill to author and schema-validate all three mutations below before executing (per its required search-then-validate workflow). API version 2026-07.
+- **`productCreate`** (`shopify store execute --allow-mutations`) — created product `gid://shopify/Product/9595773681922`, title "MotiThera Neck Relax — Heat, Pulse & Red Light Massager", status DRAFT, vendor MotiThera, productType "Neck Massager", tags (neck massager, red light therapy, heat therapy, shoulder relief, tension relief, desk wellness), description written to the verified sourcing-PDF spec (heat, 4-node vibration massage, low-frequency pulse, soft red light, USB-C rechargeable) plus a "not a medical device" disclaimer. No userErrors. (Note: the `input` argument on `productCreate` is deprecated in this API version — used `product: ProductCreateInput` instead.)
+- **`productVariantsBulkUpdate`** — set the default variant (`gid://shopify/ProductVariant/48369295786242`) price to $499.00, compareAtPrice to $699.00. No userErrors.
+- **`productUpdate` with `media`** — attached the 3 Higgsfield-generated placeholder images (from `brand/assets/placeholders/`, via their CDN URLs) to the product. No userErrors. (Note: `productCreateMedia` is deprecated in this API version — used `productUpdate(product, media)` instead.)
+- Product is **Draft** — not visible on any sales channel, per rule 3. Nothing published.
+
 ## 2026-08-23 — Product sourcing read + draft listing prepared (store creation still blocked)
 
 - Read the full Alibaba sourcing PDF (`sourcing/FireShot Capture 022...`) by rendering it directly via poppler's full install path (winget PATH still not live in this session — see `CLAUDE.md` gotchas) and splitting the resulting ~12,800px-tall page image into crops with Pillow.
