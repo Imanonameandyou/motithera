@@ -30,12 +30,13 @@ This file records the standing rules for how Claude Code operates on this Shopif
 This store used to be single-brand (LullyRest). It's now shared between **LullyRest** and **MotiThera**. Known LullyRest objects that MotiThera work must never read, write, or publish over:
 
 - Theme `LullyRest — Presell + PDP (draft)` (`163498656002`) — role **live** (confirmed via `shopify theme list` 2026-08-24). This is the current storefront — never touch it.
-- Theme **Horizon** (`163498262786`) — role **unpublished** (as of 2026-08-24; was live earlier in the project, roles can flip — always re-check with `shopify theme list` rather than trusting this note before assuming which theme is live).
-- Theme `elixir-1-6-1-pillow` (`163498426626`) — role unpublished, LullyRest's source theme.
+- Theme **Horizon** (`163498262786`) — role **unpublished** (as of 2026-08-24; was live earlier in the project, roles can flip — always re-check with `shopify theme list` rather than trusting this note before assuming which theme is live). MotiThera's first draft theme (`163621273858`) was duplicated from this before the 2026-08-24 switch to elixir below — that theme/local `theme-horizon-unused/` folder is superseded, kept only for reference, not actively worked in.
 - LullyRest product `9589261009154` and bonus/GWP products (`9591781064962`, `9591783981314`, `9591784243458`), page `136591114498` (handle `presell`).
 - LullyRest's own repo/history lives in a separate git remote (`lullyrestcode.git`) — not this one.
 
-MotiThera work duplicates its own theme and creates its own products/pages from scratch. If a task seems like it needs to touch any of the objects above, stop and confirm with the user first — that's almost certainly a mistake.
+**Exception, user-approved 2026-08-24: theme `elixir-1-6-1-pillow` (`163498426626`) may be used as a duplication source for MotiThera.** It's LullyRest's original source theme, but the user explicitly said MotiThera can build on it too. The rule is still: duplicate it into a **new, separate, MotiThera-owned unpublished theme** (pull + `theme push --unpublished` under a new name, same pattern used for the Horizon draft) — never edit theme `163498426626` itself, and never touch the two LullyRest theme/product objects listed above. Confirm this distinction is still what's wanted before assuming it extends to any other LullyRest object.
+
+MotiThera work duplicates its own theme and creates its own products/pages from scratch. If a task seems like it needs to directly read, write, or publish one of the *live/off-limits* objects above (not a duplication-source theme), stop and confirm with the user first — that's almost certainly a mistake.
 
 ## Brand / product context
 
