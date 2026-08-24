@@ -1,0 +1,329 @@
+{
+  "sections": {
+    "announcement_bar": {
+      "type": "custom-announcement-bar",
+      "settings": {
+        "enable_slider": true,
+        "text": "<p>$200 off the Neck Relax</p>",
+        "slide_1": "<p>$200 off the Neck Relax</p>",
+        "slide_1_button_text": "Shop Now",
+        "slide_1_button_link": "#shopify-section-main",
+        "slide_1_bg_color": "#14202E",
+        "slide_1_text_color": "#FAF9F6",
+        "slide_1_button_bg": "#C1502E",
+        "slide_1_button_text_color": "#FAF9F6",
+        "background_color": "#14202E",
+        "text_color": "#FAF9F6"
+      }
+    },
+    "hero": {
+      "type": "new-hero",
+      "settings": {
+        "use_theme_colors": false,
+        "hero_image": "shopify://shop_images/motithera-onbody-hero.png",
+        "use_background_image": false,
+        "section_bg": "#14202E",
+        "desktop_content_alignment": "left",
+        "subtitle_color": "#FAF9F6",
+        "badge_bg": "#4C6B7A",
+        "badge_text_color": "#FAF9F6",
+        "button_bg": "#C1502E",
+        "button_text_color": "#FAF9F6",
+        "use_global_button_styling": false
+      },
+      "blocks": {
+        "badge": {
+          "type": "badge",
+          "settings": {
+            "badge_text": "HEAT · PULSE · RED LIGHT",
+            "icon_type": "none",
+            "badge_text_color": "#FAF9F6",
+            "enable_container_background": true,
+            "container_background_color": "#4C6B7A"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "use_theme_colors": false,
+            "heading_color": "#FAF9F6",
+            "heading": "Heat, pulse &amp; red light —",
+            "heading_accent": "engineered for the always-on neck."
+          }
+        },
+        "subtitle": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "<p>Wireless, hands-free relief for the tension a desk-bound day leaves behind.</p>",
+            "subtitle_text_color": "#FAF9F6"
+          }
+        },
+        "benefits": {
+          "type": "benefits",
+          "settings": {
+            "use_theme_colors": false,
+            "benefit_text_color": "#FAF9F6",
+            "benefit_icon_color": "#C1502E",
+            "benefit_1_icon": "check",
+            "benefit_1_text": "Wireless &amp; hands-free",
+            "benefit_2_icon": "check",
+            "benefit_2_text": "USB-C rechargeable",
+            "benefit_3_icon": "check",
+            "benefit_3_text": "Designed for desk-day wear"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop the Neck Relax — $499",
+            "button_link": "#shopify-section-main",
+            "use_global_button_styling": false,
+            "button_bg_color": "#C1502E",
+            "button_text_color": "#FAF9F6",
+            "button_hover_bg_color": "#A43F22",
+            "button_border_radius": 3,
+            "button_border_width": 0
+          }
+        }
+      },
+      "block_order": ["badge", "heading", "subtitle", "benefits", "button"]
+    },
+    "problem_agitation": {
+      "type": "image-banner",
+      "settings": {
+        "use_theme_colors": false,
+        "section_background_color": "#FAF9F6",
+        "banner_image": "shopify://shop_images/motithera-neck-relax-detail.png",
+        "image_position": "right",
+        "heading": "Neck and shoulder tension rarely stays in one spot.",
+        "subheading": "<p>The burning \"coat hanger\" ache across your traps by mid-afternoon. Rock-hard knots that come back no matter how much you stretch. Tension headaches that start at the base of your skull. A stiff neck that won't fully rotate by the end of a desk day. Shoulder tightness that follows you into the evening.</p>",
+        "text_alignment": "left",
+        "heading_color": "#14202E",
+        "subheading_color": "#3C4753",
+        "show_button": false
+      }
+    },
+    "use_case_grid": {
+      "type": "4-benefits",
+      "settings": {
+        "use_theme_colors": false,
+        "heading_regular": "How the Neck Relax Can Help",
+        "heading_accent": "",
+        "subtitle": "",
+        "heading_color": "#14202E",
+        "benefit_title_color": "#14202E",
+        "benefit_description_color": "#3C4753",
+        "section_background": "#FAF9F6",
+        "hide_icon_background": true,
+        "benefit_icon_container_size_desktop": 150,
+        "benefit_icon_size_desktop": 100,
+        "icon_border_radius": 6
+      },
+      "blocks": {
+        "tile_1": {"type": "benefit", "settings": {"use_image": true, "icon_image": "shopify://shop_images/motithera-usecase-coathanger-tension.png", "title": "Afternoon coat-hanger tension", "description": ""}},
+        "tile_2": {"type": "benefit", "settings": {"use_image": true, "icon_image": "shopify://shop_images/motithera-usecase-trap-knot.png", "title": "Trapezius knots", "description": ""}},
+        "tile_3": {"type": "benefit", "settings": {"use_image": true, "icon_image": "shopify://shop_images/motithera-usecase-tension-headache.png", "title": "Tension headaches from screen posture", "description": ""}},
+        "tile_4": {"type": "benefit", "settings": {"use_image": true, "icon_image": "shopify://shop_images/motithera-usecase-evening-tightness.png", "title": "End-of-day shoulder tightness", "description": ""}}
+      },
+      "block_order": ["tile_1", "tile_2", "tile_3", "tile_4"]
+    },
+    "benefit_grid": {
+      "type": "product-benefits",
+      "settings": {
+        "use_theme_colors": false,
+        "heading_regular": "How the Neck Relax",
+        "heading_accent": "May Help",
+        "subtitle": "<p>Structural relief, described plainly — not clinical claims.</p>",
+        "heading_color": "#14202E",
+        "subtitle_color": "#3C4753",
+        "accent_color": "#C1502E",
+        "override_global_accent": true,
+        "section_background": "#EEF2F3",
+        "list_background": "#EEF2F3",
+        "border_color": "#DCE3E6",
+        "show_image": true,
+        "media_type": "image",
+        "feature_image": "shopify://shop_images/motithera-onbody-feature-panel.png",
+        "image_alt": "MotiThera Neck Relax worn hands-free",
+        "image_position_desktop": "right"
+      },
+      "blocks": {
+        "b1": {"type": "benefit", "settings": {"title": "Heat", "description": "May help ease surface tension", "use_image": false, "preset_icon": "check"}},
+        "b2": {"type": "benefit", "settings": {"title": "Vibration massage", "description": "Designed to support relaxation", "use_image": false, "preset_icon": "check"}},
+        "b3": {"type": "benefit", "settings": {"title": "Pulse modes", "description": "Rhythmic, adjustable intensity", "use_image": false, "preset_icon": "check"}},
+        "b4": {"type": "benefit", "settings": {"title": "Red light", "description": "A calming addition to your routine", "use_image": false, "preset_icon": "check"}}
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+    "feature_panel": {
+      "type": "image-banner",
+      "settings": {
+        "use_theme_colors": false,
+        "section_background_color": "#14202E",
+        "banner_image": "shopify://shop_images/motithera-onbody-feature-panel.png",
+        "image_position": "left",
+        "heading": "Built for how you actually work",
+        "subheading": "<p><strong>Constant 42°C heat</strong> — steady warmth, no fiddling with settings<br><strong>4-node vibration massage</strong> — targets the neck and both shoulders at once<br><strong>Low-frequency pulse modes</strong> — adjustable intensity, your choice<br><strong>Soft red light</strong> — a calming glow while you work<br><strong>Wireless &amp; USB-C rechargeable</strong> — no cords, no wall tether</p>",
+        "text_alignment": "left",
+        "heading_color": "#FAF9F6",
+        "subheading_color": "#FAF9F6",
+        "show_button": false
+      }
+    },
+    "how_to_steps": {
+      "type": "steps",
+      "settings": {
+        "use_theme_colors": false,
+        "background_type": "solid",
+        "section_background_color": "#14202E",
+        "title": "How Do I Use The Neck Relax?",
+        "title_highlight": "",
+        "subtitle": "",
+        "title_color": "#FAF9F6",
+        "step_title_color": "#FAF9F6",
+        "description_color": "#FAF9F6",
+        "show_step_numbers": true,
+        "show_step_images": true,
+        "number_background_color": "#C1502E",
+        "default_card_background": "#14202E"
+      },
+      "blocks": {
+        "s1": {"type": "step", "settings": {"step_image": "shopify://shop_images/motithera-step1-position.png", "step_title": "Position the wrap", "step_description": "Position the wrap around your neck and shoulders.", "content_background_color": "#14202E", "card_background_color": "#14202E"}},
+        "s2": {"type": "step", "settings": {"step_image": "shopify://shop_images/motithera-step2-power-on.png", "step_title": "Power on and select your mode", "step_description": "Choose heat, pulse, or vibration intensity.", "content_background_color": "#14202E", "card_background_color": "#14202E"}},
+        "s3": {"type": "step", "settings": {"step_image": "shopify://shop_images/motithera-step3-wear-hands-free.png", "step_title": "Wear it hands-free", "step_description": "At your desk, on a call, or winding down.", "content_background_color": "#14202E", "card_background_color": "#14202E"}}
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "trust_marquee": {
+      "type": "scrolling-features-bar",
+      "settings": {
+        "background_color": "#EEF2F3",
+        "text_color": "#14202E",
+        "icon_color": "#4C6B7A",
+        "slider_direction": "left",
+        "scrolling_velocity": 15,
+        "pause_on_hover": true,
+        "use_gradient_background": false
+      },
+      "blocks": {
+        "f1": {"type": "feature_item", "settings": {"text": "HEAT + PULSE + RED LIGHT", "icon_type": "svg", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z\"></path></svg>"}},
+        "f2": {"type": "feature_item", "settings": {"text": "WIRELESS & HANDS-FREE", "icon_type": "svg", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z\"></path></svg>"}},
+        "f3": {"type": "feature_item", "settings": {"text": "USB-C RECHARGEABLE", "icon_type": "svg", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z\"></path></svg>"}},
+        "f4": {"type": "feature_item", "settings": {"text": "60-DAY GUARANTEE", "icon_type": "svg", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z\"></path></svg>"}},
+        "f5": {"type": "feature_item", "settings": {"text": "1-YEAR WARRANTY", "icon_type": "svg", "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z\"></path></svg>"}}
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5"]
+    },
+    "main": {
+      "type": "shop-product-details",
+      "settings": {
+        "use_theme_colors": false,
+        "section_bg_color": "#FAF9F6",
+        "text_color": "#14202E",
+        "accent_color": "#C1502E",
+        "show_product_info": true,
+        "show_product_gallery": true,
+        "show_product_variants": true,
+        "image_aspect_ratio": "1:1"
+      },
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": { "use_custom_title": false, "title_color": "#14202E", "font_size": 32 }
+        },
+        "price": {
+          "type": "price",
+          "settings": { "price_color": "#14202E", "compare_price_color": "#9AA3AA", "sale_badge_bg_color": "#F5DCD3", "sale_badge_text_color": "#832F19" }
+        },
+        "simple_variant_picker": {
+          "type": "simple_variant_picker",
+          "settings": { "label_color": "#14202E", "option_text_color": "#14202E", "selected_text_color": "#FAF9F6", "selected_bg_color": "#C1502E", "selected_border_color": "#C1502E" }
+        },
+        "add_to_cart": {
+          "type": "add_to_cart",
+          "settings": {
+            "use_theme_colors": false,
+            "use_global_button_styling": false,
+            "button_behavior": "add_to_cart",
+            "button_text_override": "BUY NOW",
+            "show_price_in_button": true,
+            "buy_box_button_bg_color": "#C1502E",
+            "button_text_color": "#FAF9F6",
+            "buy_box_button_hover_color": "#A43F22",
+            "price_color": "#FAF9F6"
+          }
+        },
+        "guarantee_badges": {
+          "type": "guarantee_badges",
+          "settings": {
+            "badge_1_show": true,
+            "badge_1_text": "60-Day Money-Back Guarantee",
+            "badge_1_icon": "shield",
+            "badge_2_show": true,
+            "badge_2_text": "1-Year Hardware Warranty",
+            "badge_2_icon": "checkmark",
+            "icon_color": "#4C6B7A",
+            "text_color": "#3C4753"
+          }
+        },
+        "payment_icons": {
+          "type": "payment_icons",
+          "settings": { "custom_payment_icons": "mastercard, american_express, apple_pay, google_pay, shopify_pay, discover, visa", "alignment": "left" }
+        },
+        "divider": {
+          "type": "divider",
+          "settings": { "color": "#DCE3E6", "style": "solid", "thickness": 1, "width": "100%" }
+        }
+      },
+      "block_order": ["title", "price", "simple_variant_picker", "add_to_cart", "guarantee_badges", "payment_icons", "divider"]
+    },
+    "faq": {
+      "type": "store-faq",
+      "settings": {
+        "use_theme_colors": false,
+        "heading": "Got Questions? We Have Answers.",
+        "subtitle": "<p>Everything you need to know about the Neck Relax.</p>",
+        "heading_color": "#14202E",
+        "section_bg_color": "#FAF9F6",
+        "question_color": "#14202E",
+        "question_bg_color": "#FAF9F6",
+        "answer_color": "#3C4753",
+        "answer_bg_color": "#FAF9F6",
+        "border_color": "#DCE3E6",
+        "accordion_mode": true
+      },
+      "blocks": {
+        "q1": {"type": "faq_item", "settings": {"question": "What's your return policy?", "answer": "<p>You have 60 days to try the Neck Relax at home. If it's not for you, send it back for a full refund — we cover return shipping.</p>"}},
+        "q2": {"type": "faq_item", "settings": {"question": "What's covered under warranty?", "answer": "<p>Every Neck Relax comes with a 1-year hardware warranty covering manufacturing defects.</p>"}},
+        "q3": {"type": "faq_item", "settings": {"question": "How does it work?", "answer": "<p>The Neck Relax combines constant 42°C heat, 4-node vibration massage, low-frequency pulse modes, and a soft red light glow in one wireless, hands-free wrap.</p>"}},
+        "q4": {"type": "faq_item", "settings": {"question": "Is it safe for daily use?", "answer": "<p>The device is FCC, CE, and RoHS certified for safety, and designed for comfortable daily wear.</p>"}},
+        "q5": {"type": "faq_item", "settings": {"question": "How do I charge it?", "answer": "<p>It charges via USB-C — no proprietary cable required.</p>"}},
+        "q6": {"type": "faq_item", "settings": {"question": "How do I clean it?", "answer": "<p>Wipe the strap and device with a soft, dry cloth. Avoid submerging it in water.</p>"}}
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"]
+    },
+    "trust_icon_bar": {
+      "type": "4-benefits",
+      "settings": {
+        "use_theme_colors": false,
+        "heading_regular": "",
+        "heading_accent": "",
+        "subtitle": "",
+        "section_background": "#EEF2F3",
+        "benefit_title_color": "#14202E",
+        "hide_icon_background": false,
+        "icon_background": "#4C6B7A",
+        "benefit_icon_container_size_desktop": 56,
+        "benefit_icon_size_desktop": 28
+      },
+      "blocks": {
+        "i1": {"type": "benefit", "settings": {"use_image": false, "preset_icon": "refresh", "title": "60-Day Guarantee", "description": ""}},
+        "i2": {"type": "benefit", "settings": {"use_image": false, "preset_icon": "shield", "title": "1-Year Warranty", "description": ""}},
+        "i3": {"type": "benefit", "settings": {"use_image": false, "preset_icon": "check", "title": "Wireless &amp; Hands-Free", "description": ""}},
+        "i4": {"type": "benefit", "settings": {"use_image": false, "preset_icon": "lightning", "title": "USB-C Rechargeable", "description": ""}}
+      },
+      "block_order": ["i1", "i2", "i3", "i4"]
+    }
+  },
+  "order": ["announcement_bar", "hero", "problem_agitation", "use_case_grid", "benefit_grid", "feature_panel", "how_to_steps", "trust_marquee", "main", "faq", "trust_icon_bar"]
+}

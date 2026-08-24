@@ -35,7 +35,24 @@ await page.setViewport({ width: 1440, height: 900 });
 // hot-reload channel keeps a persistent connection open, so network
 // activity never goes idle.
 await page.goto(url, { waitUntil: "load", timeout: 30000 });
+
+// Scroll through the full page first so native loading="lazy" images and
+// scroll-triggered content below the fold actually load/reveal before the
+// screenshot — a fullPage capture does NOT itself trigger the viewport
+// intersection these rely on.
+await page.evaluate(async () => {
+  const step = 600;
+  let scrolled = 0;
+  const scrollHeight = () => document.body.scrollHeight;
+  while (scrolled < scrollHeight()) {
+    window.scrollBy(0, step);
+    scrolled += step;
+    await new Promise((resolve) => setTimeout(resolve, 120));
+  }
+  window.scrollTo(0, 0);
+});
 await new Promise((resolve) => setTimeout(resolve, 1000));
+
 await page.screenshot({ path: outPath, fullPage: true });
 await browser.close();
 
