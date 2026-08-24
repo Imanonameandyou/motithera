@@ -44,7 +44,20 @@ MotiThera work duplicates its own theme and creates its own products/pages from 
 - **Funnel-critical beliefs** a prospect must hold before buying: [`brand/NECESSARY_BELIEFS.md`](brand/NECESSARY_BELIEFS.md) — use as a coverage checklist when writing any presell/PDP copy, but same caveat as above on the specific mechanism claims.
 - **Market research / voice-of-customer:** [`research/MARKET_RESEARCH_DOSSIER.md`](research/MARKET_RESEARCH_DOSSIER.md) — long document, grep it rather than reading end to end.
 - **Product sourcing:** [`sourcing/`](sourcing/) — Alibaba listing for the sourced device (Create Top Electronics, model `JT-8B`): EMS/TENS pulse, 42°C heat, 4 vibration massage nodes, "mild red light" (no stated wavelength/irradiance), FCC/CE/RoHS certified (safety/EMC, not medical). Already read — see `PROGRESS.md` 2026-08-23 for how (poppler direct-path workaround) and the full finding.
-- **Competitor swipe:** [`swipe/`](swipe/) — Kineon (kineon.io) neck-and-shoulder use-case landing page. **Read this before writing any page copy or choosing a page format**, same convention as the LullyRest project.
+- **Competitor swipe:** [`swipe/`](swipe/) — Kineon (kineon.io) neck-and-shoulder use-case landing page, two captures: `Capture 021` (earlier) and `Capture 023` (2026-08-24, supersedes 021 — used as the structural reference for the product page build below). **Read this before writing any page copy or choosing a page format**, same convention as the LullyRest project.
+
+### Before writing any MotiThera customer-facing copy — always read these first
+
+Don't write headlines, PDP/presell copy, FAQ answers, ad copy, or emails from memory or general knowledge of the niche. Always (re-)read, in this order:
+
+1. `brand/AVATAR_SHEET.md` — who we're talking to, their pain in their own words (use verbatim quotes where possible)
+2. `brand/NECESSARY_BELIEFS.md` — the belief checklist the copy needs to cover before a CTA
+3. `offer/OFFER_BRIEF.md` — positioning/mechanism/objections, but filter everything through "Claim integrity" below before it ships
+4. `research/MARKET_RESEARCH_DOSSIER.md` — grep for the specific topic, it's long
+5. `swipe/` (Kineon) — structure/format reference, read before choosing a page format
+6. `brand/BRAND_GUIDE.md` — voice section (§8) and reference copy example (§9) for how it should actually sound once claim-integrity has filtered it
+
+This list itself doesn't change often — but the underlying docs do (e.g. a `[VERIFY]` claim gets confirmed or rejected), so re-read them each time rather than relying on a memory of what they said last session.
 
 ## Claim integrity (standing rule — extra weight in this niche)
 
@@ -52,7 +65,10 @@ Never ship a review, star rating, review count, testimonial, named endorsement, 
 
 This niche carries **more regulatory exposure than a pillow**: it's a light-emitting device making implicit health claims (pain relief, cellular/ATP mechanism, "clinical-grade," "medical-grade"). Treat every claim sourced from `offer/OFFER_BRIEF.md` and `research/MARKET_RESEARCH_DOSSIER.md` as a draft, not a fact:
 
-- Anything marked `[VERIFY: …]` in `offer/OFFER_BRIEF.md` (the Lancet/820-patient citation, "5,000 studies," HSA/FSA eligibility, the specific 60-day/2-year guarantee terms, the >100 mW/cm² irradiance spec) **must be confirmed against a real source or the actual sourced device** before it appears in any customer-facing copy. Until verified, keep the `[VERIFY]` marker inline.
+- Anything marked `[VERIFY: …]` in `offer/OFFER_BRIEF.md` (the Lancet/820-patient citation, "5,000 studies," HSA/FSA eligibility, the >100 mW/cm² irradiance spec) **must be confirmed against a real source or the actual sourced device** before it appears in any customer-facing copy. Until verified, keep the `[VERIFY]` marker inline.
+- **Exception — guarantee/warranty CONFIRMED real by user 2026-08-24:** 60-day money-back guarantee (prepaid return shipping, full refund) + 1-year hardware warranty. Safe to state as fact, no `[VERIFY]` flag. This overrides the offer brief's unconfirmed 60-day figure and `research/MARKET_RESEARCH_DOSSIER.md`'s 2-year warranty figure — 1 year is correct.
+- **Still unconfirmed, do not claim:** HSA/FSA eligibility. Leave it out of copy entirely (not a fillable `[EMPTY]` slot) until the user confirms.
+- **Sections that depend entirely on nonexistent proof** (star ratings/review counts, clinician endorsement badges, press-logo strips, stats/citation proof panels) — don't ship these with visible `[EMPTY]` placeholders; an empty carousel or logo strip reads as broken, not honest. Omit the section from the live template entirely; build the section file only if it's reasonably likely to be populated soon (e.g. a testimonial carousel), otherwise skip it. Never attach real general-research citations (e.g. genuine PBM literature) to imply clinical validation for this specific device — it's FCC/CE/RoHS-only, not medical-grade, and doing so is the same "clinical-grade laundering" this rule exists to prevent even when the citation itself is real.
 - Keep product language structural ("supports," "designed to," "may help relax") rather than therapeutic/diagnostic ("treats," "cures," "relieves migraines," "FDA-cleared" unless it actually is).
 - "Aerospace-grade," "medical-grade," "clinical irradiance" are marketing metaphors in the offer brief, not verified specs — don't launder them into hard claims without checking the actual sourced product's documentation.
 
@@ -110,6 +126,7 @@ research/                market research & voice-of-customer dossier
 sourcing/                Alibaba supplier screenshots — read before finalizing product specs
 swipe/                   competitor landing pages to swipe structure/format from (Kineon)
 theme/                   (not created yet — added once a theme is duplicated for MotiThera)
+docs/superpowers/specs/ design specs (e.g. the product presell/PDP page design, 2026-08-24)
 screenshot.mjs           Puppeteer screenshot runner — node screenshot.mjs <url> [label]
 package.json / node_modules/  local Puppeteer install (npm install puppeteer already run)
 temporary screenshots/   visual-verification screenshots (git-ignored)
@@ -117,7 +134,9 @@ temporary screenshots/   visual-verification screenshots (git-ignored)
 
 ## Session objectives (current)
 
-As of 2026-08-23: environment bootstrapped (docs organized, `.docx` → Markdown, git initialized), Puppeteer visual-verification workflow set up and working, and the **first MotiThera product created** — `gid://shopify/Product/9595773681922`, DRAFT, $499/$699, 3 placeholder images (see "Store access" above and `PROGRESS.md` for the full mutation log). Copy was rewritten to match the actual sourced device's real spec sheet rather than the offer brief's unverified clinical-PBM claims, per the claim-integrity finding. **No theme has been duplicated yet** — that's the next store-side task. Once a theme exists, pick up the "Frontend / visual verification workflow" section above.
+As of 2026-08-23: environment bootstrapped (docs organized, `.docx` → Markdown, git initialized), Puppeteer visual-verification workflow set up and working, and the **first MotiThera product created** — `gid://shopify/Product/9595773681922`, DRAFT, $499/$699, 3 placeholder images (see "Store access" above and `PROGRESS.md` for the full mutation log). Copy was rewritten to match the actual sourced device's real spec sheet rather than the offer brief's unverified clinical-PBM claims, per the claim-integrity finding.
+
+**As of 2026-08-24: building the product presell + PDP page**, modeled section-by-section on the Kineon swipe (`swipe/FireShot Capture 023...`). Design approved by user — full spec at [`docs/superpowers/specs/2026-08-24-product-presell-page-design.md`](docs/superpowers/specs/2026-08-24-product-presell-page-design.md), read that before touching any section of this build. **No theme has been duplicated yet** — that's the first store-side step of this build. Once the draft theme exists, pick up the "Frontend / visual verification workflow" section above.
 
 ## Git / version control
 
