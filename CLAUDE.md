@@ -21,16 +21,17 @@ This file records the standing rules for how Claude Code operates on this Shopif
   - **Correction — this is Windows, not Mac/Linux:** the config is **not** under `~/.config/shopify` (checked repeatedly, never existed). It's under `%APPDATA%\shopify-cli-kit-nodejs\Config\config.json` (auth session) and `%APPDATA%\shopify-cli-store-nodejs\Config\config.json` (per-store scoped auth). Check those paths on this machine, not the Unix convention.
 - **`shopify store execute` returns the raw result object, not wrapped in a GraphQL `data` key — confirmed 2026-08-23** (e.g. a `productCreate` call returned `{"productCreate": {...}}` directly). Parsers assuming a `data` wrapper will silently miss `userErrors`.
 - Store auth is per-machine — a machine with no stored session needs `shopify auth login` + `shopify store auth` again, regardless of consent granted elsewhere.
-- **First MotiThera product created 2026-08-23**, DRAFT status: `gid://shopify/Product/9595773681922` ("MotiThera Neck Relax — Heat, Pulse & Red Light Massager", $499.00 / compare-at $699.00, 3 placeholder images). Full mutation log in `PROGRESS.md`. No theme duplicated yet — that's still the next store-side task, per rule 2.
+- **First MotiThera product created 2026-08-23**, DRAFT status: `gid://shopify/Product/9595773681922` ("MotiThera Neck Relax — Heat, Pulse & Red Light Massager", $499.00 / compare-at $699.00, 3 placeholder images). Full mutation log in `PROGRESS.md`.
+- **MotiThera draft theme created 2026-08-24**: `MotiThera — Presell + PDP (draft)`, theme id `163621273858`, role `unpublished` — created by pulling Horizon (`163498262786`) locally to `theme/` and pushing with `--unpublished`. This is now the only theme MotiThera work should touch (`shopify theme dev --theme 163621273858 ...`). **Horizon is a block-composition theme** (JSON templates nesting `group`/`text`/`image`/`icon`/`button`/`accordion`/`marquee` block primitives inside a handful of section shells like `hero.liquid`, `media-with-content.liquid`, the generic `section.liquid` canvas) — not the classic one-bespoke-Liquid-file-per-section model. See `docs/superpowers/plans/2026-08-24-product-presell-page.md` for the confirmed real schemas.
 - When authoring new Admin GraphQL mutations, use the `shopify-plugin:shopify-admin` skill (search docs, then validate the query, before executing) rather than relying on trained knowledge of field names — the API changes: `productCreate` now takes a `product: ProductCreateInput` argument (the old `input` arg is deprecated), and `productCreateMedia` is deprecated in favor of `productUpdate(product, media)`. Both discovered by the skill's validator, not by guessing.
 
 ## Shared store — LullyRest is also here
 
 This store used to be single-brand (LullyRest). It's now shared between **LullyRest** and **MotiThera**. Known LullyRest objects that MotiThera work must never read, write, or publish over:
 
-- Theme **Horizon** (`163498262786`) — role MAIN (live storefront for whichever brand is currently published — check before assuming).
-- Theme `elixir-1-6-1-pillow` (`163498426626`) — UNPUBLISHED, LullyRest's source theme.
-- Theme `LullyRest — Presell + PDP (draft)` (`163498656002`) — UNPUBLISHED, LullyRest's working draft.
+- Theme `LullyRest — Presell + PDP (draft)` (`163498656002`) — role **live** (confirmed via `shopify theme list` 2026-08-24). This is the current storefront — never touch it.
+- Theme **Horizon** (`163498262786`) — role **unpublished** (as of 2026-08-24; was live earlier in the project, roles can flip — always re-check with `shopify theme list` rather than trusting this note before assuming which theme is live).
+- Theme `elixir-1-6-1-pillow` (`163498426626`) — role unpublished, LullyRest's source theme.
 - LullyRest product `9589261009154` and bonus/GWP products (`9591781064962`, `9591783981314`, `9591784243458`), page `136591114498` (handle `presell`).
 - LullyRest's own repo/history lives in a separate git remote (`lullyrestcode.git`) — not this one.
 
