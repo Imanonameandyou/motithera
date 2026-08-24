@@ -31,7 +31,11 @@ const outPath = path.join(outDir, fileName);
 const browser = await puppeteer.launch({ headless: true });
 const page = await browser.newPage();
 await page.setViewport({ width: 1440, height: 900 });
-await page.goto(url, { waitUntil: "networkidle0", timeout: 30000 });
+// networkidle0 never resolves against Shopify's theme dev server — its
+// hot-reload channel keeps a persistent connection open, so network
+// activity never goes idle.
+await page.goto(url, { waitUntil: "load", timeout: 30000 });
+await new Promise((resolve) => setTimeout(resolve, 1000));
 await page.screenshot({ path: outPath, fullPage: true });
 await browser.close();
 
