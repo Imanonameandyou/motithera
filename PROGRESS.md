@@ -4,6 +4,21 @@ Audit log of every API call and file change made to the store or this project. N
 
 ---
 
+## 2026-09-07 — Environment re-bootstrapped on a second machine (`l9moneyprinter\hexadrine`, `C:\Users\Hexadrine`)
+
+New machine — none of the tooling from the original `jomat_nweuhlk` machine was present (only git 2.55.0, winget 1.29, VS Code). Ran `git pull` (already up to date), then followed `SHOPIFY_BOOTSTRAP.md`. No store data touched — local install steps only.
+
+- **Node.js LTS installed** via `winget install OpenJS.NodeJS.LTS` → node v24.19.0 / npm 11.17.0. MSI added `C:\Program Files\nodejs\` to the machine PATH and `%APPDATA%\Roaming\npm` to the user PATH.
+- **Shopify CLI installed** via `npm install -g @shopify/cli@latest` → v4.7.1. `shopify version`, `shopify store --help`, `shopify doc --help` all functional. npm 11 blocked one optional postinstall (`esbuild@0.28.1`) — not needed for store/theme/doc commands; only matters for `shopify app` bundling.
+- **Poppler installed** via `winget install oschwartz10612.Poppler` → v25.07.0. Bin dir on this machine: `C:\Users\Hexadrine\AppData\Local\Microsoft\WinGet\Packages\oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe\poppler-25.07.0\Library\bin`. winget added it to the user PATH. `pdfinfo` verified against a real `sourcing/` PDF.
+- **Puppeteer installed** via `npm install` in project root (`node_modules/` was absent from the clone). npm 11 blocked Puppeteer's Chrome-download postinstall — ran it manually with `node node_modules/puppeteer/install.mjs`; Chrome 152.0.7977.42 + headless-shell downloaded to `C:\Users\Hexadrine\.cache\puppeteer\`.
+- **`screenshot.mjs` verified end-to-end** against `https://example.com` (`temporary screenshots/screenshot-1-bootstrap-smoketest.png`). First Chrome launch timed out once (>30s) — Windows Defender scanning the fresh 200MB binary; every launch after was fine. `screenshot.mjs` unchanged, no `--no-sandbox` needed once the binary is warm.
+- **Persistent PATH after a VS Code restart will include:** `C:\Program Files\nodejs\` (machine), `%APPDATA%\Roaming\npm` + the Poppler bin dir (user). The currently-running session still needs full paths / a session `$env:PATH` prepend until VS Code is restarted.
+- **Still needs the user (interactive, can't be scripted):**
+  1. `shopify auth login` — no auth session on this machine (`%APPDATA%\shopify-cli-kit-nodejs\Config\config.json` has only cache, no identity; `shopify-cli-store-nodejs` config absent).
+  2. `shopify store auth --store gcvy0q-cb.myshopify.com --scopes read_products,write_products` (add `read_themes,write_themes` etc. as tasks need them) — one browser consent click.
+  3. **`shopify-ai-toolkit` Claude Code plugin** — not installed on this machine (`~/.claude/plugins` absent; no `shopify-plugin:*` skills loaded). Install via `/plugin` in an interactive Claude Code session (the Shopify CLI already emits the `shopify-ai-toolkit@claude-plugins-official` install hint).
+
 ## 2026-08-24 — Presell + PDP product page built on elixir-1-6-1-pillow theme
 
 Full build session — design spec at `docs/superpowers/specs/2026-08-24-product-presell-page-design.md`, implementation plan at `docs/superpowers/plans/2026-08-24-product-presell-page.md` (plan was written against Horizon, then superseded mid-execution by the elixir switch below; the plan's content/copy decisions still apply, only the underlying theme/section mechanism changed).
