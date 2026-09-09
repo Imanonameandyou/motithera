@@ -4,6 +4,13 @@ Audit log of every API call and file change made to the store or this project. N
 
 ---
 
+## 2026-09-09 — Shopify auth completed on the second machine
+
+- User ran `shopify auth login` in cmd (created `sessionStore` + `currentSessionId` in `%APPDATA%\shopify-cli-kit-nodejs\Config\config.json`).
+- Claude ran `shopify store auth --store gcvy0q-cb.myshopify.com --scopes read_products,write_products,read_themes,write_themes` — browser consent auto-completed against the fresh login session; `%APPDATA%\shopify-cli-store-nodejs\Config\config.json` now written. Output: "Authenticated as jomatheoos@gmail.com against gcvy0q-cb.myshopify.com."
+- Verified read-only: `shopify store info --store gcvy0q-cb.myshopify.com --json` → org `MotiThera` (229789884), admin `https://admin.shopify.com/store/gcvy0q-cb`. `shopify store execute` GraphQL smoke (`query { shop { name myshopifyDomain plan { displayName } } }`) → `MotiThera` / `gcvy0q-cb.myshopify.com` / plan "Basic". No mutations run.
+- **Still outstanding:** `shopify-ai-toolkit` Claude plugin (needs `/plugin` in an interactive session), and `git push` (no GitHub credentials on this machine — user must push from their own terminal). Two doc commits are now pending push (`2be78a4` + this entry).
+
 ## 2026-09-07 — Environment re-bootstrapped on a second machine (`l9moneyprinter\hexadrine`, `C:\Users\Hexadrine`)
 
 New machine — none of the tooling from the original `jomat_nweuhlk` machine was present (only git 2.55.0, winget 1.29, VS Code). Ran `git pull` (already up to date), then followed `SHOPIFY_BOOTSTRAP.md`. No store data touched — local install steps only.
