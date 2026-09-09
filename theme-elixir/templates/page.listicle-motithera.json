@@ -148,7 +148,8 @@
                 "headline_font_size": 30,
                 "headline_font_size_mobile": 24,
                 "headline_font_weight": "800",
-                "show_dots": false
+                "show_dots": false,
+                "eyebrow_text": ""
               }
             },
             "cta_desc": {
