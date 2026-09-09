@@ -4,6 +4,16 @@ Audit log of every API call and file change made to the store or this project. N
 
 ---
 
+## 2026-09-09 — Shopify AI Toolkit plugin installed + token-optimization pass
+
+- **`shopify-plugin@shopify-ai-toolkit` v1.8.0 installed** (user scope, enabled). Done via the VS Code extension's bundled CLI (`C:\Users\Hexadrine\.vscode\extensions\anthropic.claude-code-2.1.266-win32-x64\resources\native-binary\claude.exe`) since `claude` isn't on PATH and claude.ai-hosted marketplaces weren't reachable from that out-of-band invocation. Steps: `claude plugin marketplace add Shopify/shopify-ai-toolkit` (HTTPS clone of the public MIT repo) → `claude plugin install shopify-plugin@shopify-ai-toolkit`. 22 skills, ~3,330 tok always-on; active next session/restart. `claude plugin details` reports per-skill token cost — `shopify-hydrogen` is ~58k on invoke, so CLAUDE.md now lists which skills are in-scope.
+- **Token-optimization pass** (researched current best practices, Sept 2026 — analyticsvidhya, buildtolaunch, stationx, code.claude.com/docs/costs). No quality-reducing changes; all are waste removal:
+  - Created `.claude/settings.json` with a `permissions.deny` Read-list: `node_modules/**`, lockfiles, `**/*.min.js`/`.min.css`/`.map`/`.log`, `.git/**`, `.cache/**`. Prevents accidental multi-thousand-token reads of build noise. Does **not** deny `temporary screenshots/**` (the visual-QA workflow reads those PNGs).
+  - Created `docs/ENVIRONMENT.md` and moved situational detail out of the always-loaded `CLAUDE.md`: machine table, Shopify auth config paths, PDF-reading (poppler) workaround, `.docx` conversion note, Puppeteer/screenshot mechanics. `CLAUDE.md` keeps only the load-bearing lines + pointers. All safety rules, shared-store rules, claim-integrity, and the brand-doc read order stayed verbatim.
+  - Added `## Token discipline` (search-don't-sweep, name the files, delegate verbose ops to subagents w/ `model: haiku`, in-scope shopify skills only, `/clear` + `/compact` habits, unused MCP connectors) and `## Compact instructions` (preserve unlogged mutations / active theme id / auth changes / `[VERIFY]` resolutions) sections to `CLAUDE.md`.
+  - Recommendation logged for the user (not yet actioned — claude.ai-side): disable unused MCP connectors (Canva, Gethookd, Gmail, Calendar, Klaviyo, Notion, Pipeboard, Stripe, Drive) in claude.ai connector settings; only Higgsfield has been used on this project.
+- Memory added: `run-setup-commands-yourself` (+ `MEMORY.md` index) — user asked Claude to run auth/CLI/git/install commands itself rather than hand back a checklist.
+
 ## 2026-09-09 — Shopify auth completed on the second machine
 
 - User ran `shopify auth login` in cmd (created `sessionStore` + `currentSessionId` in `%APPDATA%\shopify-cli-kit-nodejs\Config\config.json`).

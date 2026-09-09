@@ -15,13 +15,9 @@ This file records the standing rules for how Claude Code operates on this Shopif
 
 ## Store access
 
-- Connection method: Shopify CLI v4.7.0. Store-scoped API operations run via `shopify store auth --store <domain> --scopes <scopes>` + `shopify store execute --store <domain> --query '...'` — no custom app / manually-generated Admin API token needed.
+- Connection method: Shopify CLI (4.7.1). Store-scoped ops run via `shopify store auth --store <domain> --scopes <scopes>` + `shopify store execute --store <domain> --query '...'` (`--allow-mutations` for writes) — no custom app / Admin API token needed. `shopify store execute` returns the **raw result object, not wrapped in a GraphQL `data` key** — a `userErrors`-checking parser must not assume a `data` wrapper.
 - **Store domain: gcvy0q-cb.myshopify.com** (admin: https://admin.shopify.com/store/gcvy0q-cb). Same store as the LullyRest project — see "Shared store" below.
-- **Auth status on this machine (as of 2026-08-23): authenticated.** `shopify auth login` **cannot complete non-interactively** — attempted twice from Claude Code's Bash tool (bare, then with `--alias`) and failed both times with `Failed to prompt: Which account would you like to use?`, because on a machine with no prior session, that account-picker prompt happens before any browser step and has no non-interactive answer (`--alias` only *reuses* an existing session — it can't bootstrap a first one). User ran `shopify auth login` + `shopify store auth --store gcvy0q-cb.myshopify.com --scopes write_products,read_products` themselves in their own terminal; verified working with a read-only `shopify store info --store gcvy0q-cb.myshopify.com --json` call.
-  - **Correction — this is Windows, not Mac/Linux:** the config is **not** under `~/.config/shopify` (checked repeatedly, never existed). It's under `%APPDATA%\shopify-cli-kit-nodejs\Config\config.json` (auth session) and `%APPDATA%\shopify-cli-store-nodejs\Config\config.json` (per-store scoped auth). Check those paths on this machine, not the Unix convention.
-- **`shopify store execute` returns the raw result object, not wrapped in a GraphQL `data` key — confirmed 2026-08-23** (e.g. a `productCreate` call returned `{"productCreate": {...}}` directly). Parsers assuming a `data` wrapper will silently miss `userErrors`.
-- Store auth is per-machine — a machine with no stored session needs `shopify auth login` + `shopify store auth` again, regardless of consent granted elsewhere.
-- **Second machine (`l9moneyprinter\hexadrine`) auth completed 2026-09-09.** User ran `shopify auth login` in cmd; Claude ran `shopify store auth --store gcvy0q-cb.myshopify.com --scopes read_products,write_products,read_themes,write_themes` (browser consent auto-completed against the fresh login session). Verified: `shopify store info --json` returns org `MotiThera` (id 229789884), and `shopify store execute` runs GraphQL fine (`shop.plan.displayName` = "Basic"). Note `store info --json` on CLI 4.7.1 returns `{organizationId, organizationName, adminUrl, subdomain}` — not the store-name/plan/owner shape the old bootstrap notes described.
+- **Auth: done on the current machine** (`shopify auth login` + `store auth` with `read_products,write_products,read_themes,write_themes`, 2026-09-09; org `MotiThera` / 229789884, plan Basic). Auth is per-machine; config paths, the per-machine detail, and why first-time `shopify auth login` needs the user are in [`docs/ENVIRONMENT.md`](docs/ENVIRONMENT.md).
 - **First MotiThera product created 2026-08-23**, DRAFT status: `gid://shopify/Product/9595773681922` ("MotiThera Neck Relax — Heat, Pulse & Red Light Massager", $499.00 / compare-at $699.00, 3 placeholder images). Full mutation log in `PROGRESS.md`.
 - **MotiThera draft theme created 2026-08-24**: `MotiThera — Presell + PDP (draft)`, theme id `163621273858`, role `unpublished` — created by pulling Horizon (`163498262786`) locally to `theme/` and pushing with `--unpublished`. This is now the only theme MotiThera work should touch (`shopify theme dev --theme 163621273858 ...`). **Horizon is a block-composition theme** (JSON templates nesting `group`/`text`/`image`/`icon`/`button`/`accordion`/`marquee` block primitives inside a handful of section shells like `hero.liquid`, `media-with-content.liquid`, the generic `section.liquid` canvas) — not the classic one-bespoke-Liquid-file-per-section model. See `docs/superpowers/plans/2026-08-24-product-presell-page.md` for the confirmed real schemas.
 - When authoring new Admin GraphQL mutations, use the `shopify-plugin:shopify-admin` skill (search docs, then validate the query, before executing) rather than relying on trained knowledge of field names — the API changes: `productCreate` now takes a `product: ProductCreateInput` argument (the old `input` arg is deprecated), and `productCreateMedia` is deprecated in favor of `productUpdate(product, media)`. Both discovered by the skill's validator, not by guessing.
@@ -75,28 +71,36 @@ This niche carries **more regulatory exposure than a pillow**: it's a light-emit
 - Keep product language structural ("supports," "designed to," "may help relax") rather than therapeutic/diagnostic ("treats," "cures," "relieves migraines," "FDA-cleared" unless it actually is).
 - "Aerospace-grade," "medical-grade," "clinical irradiance" are marketing metaphors in the offer brief, not verified specs — don't launder them into hard claims without checking the actual sourced product's documentation.
 
-## Windows / environment gotchas (this machine)
+## Windows / environment
 
-- **Two machines have been used on this project.** Original: `jomat_nweuhlk`. Second (from 2026-09-07): `l9moneyprinter\hexadrine`, project at `C:\Users\Hexadrine\Desktop\MotiTheraCode`. Machine-specific paths below were written for the first machine — on the second, the user profile is `C:\Users\Hexadrine` (Poppler bin: `C:\Users\Hexadrine\AppData\Local\Microsoft\WinGet\Packages\oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe\poppler-25.07.0\Library\bin`). The second machine was bootstrapped per `SHOPIFY_BOOTSTRAP.md` on 2026-09-07 (Node v24.19.0, npm 11.17.0, Shopify CLI 4.7.1, Poppler 25.07.0, local Puppeteer + Chrome 152) — full log in `PROGRESS.md`. **Shopify auth + store auth completed 2026-09-09** (see "Store access"). Still outstanding on it: the `shopify-ai-toolkit` Claude plugin (install via `/plugin` in an interactive session), and `git push` — this machine has no GitHub credentials, so pushes must be run by the user from their own terminal (Git Credential Manager browser sign-in on first push). Tooling is on the persistent PATH but needs a VS Code restart to resolve without full paths. This shell is **PowerShell-primary**; the Bash tool does not see the Windows PATH at all — use PowerShell or absolute paths.
-- **Poppler (`pdftoppm`) installed 2026-08-23 via `winget install oschwartz10612.Poppler`** to enable reading the image-only PDFs in `swipe/` and `sourcing/`. Winget updated the user PATH, but the already-running Claude Code process (and its Bash tool subprocess) doesn't pick that up until the session/app is restarted. **If `Read` on a PDF still errors with "pdftoppm is not installed," that's this — ask the user to restart Claude Code, not to reinstall anything.**
-  - **Confirmed still true as of 2026-08-23** (later in the same day, still same un-restarted session): `Read` on a PDF with `pages` still fails with the same error, and `where pdftoppm` still resolves to nothing in Bash.
-  - **Workaround that doesn't require a restart:** call the poppler binaries by their full install path directly — `/c/Users/jomat_nweuhlk/AppData/Local/Microsoft/WinGet/Packages/oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe/poppler-25.07.0/Library/bin/pdftoppm.exe` (same dir has `pdftotext.exe`, `pdfinfo.exe`, etc.). Render the PDF to a PNG with `pdftoppm.exe -r 150 -png <pdf> <output-prefix>`, then — since these image-only PDFs are usually one very tall page (a full-page web capture, easily 10,000+ px tall) — split it into ~1500-1600px-tall crops with Pillow (`pip`/already-available `PIL`) before handing individual crops to `Read`; a single 12,000px-tall image is too tall to read usefully in one shot. `pdftotext.exe -layout` confirmed these FireShot captures have **no text layer** (0 bytes out) — image rendering is the only way to read them, there's no OCR shortcut here.
-- No `python-docx` / `pandoc` installed. The four foundational `.docx` files were converted to Markdown by a one-off stdlib script (`zipfile` + `xml.etree.ElementTree` pulling `word/document.xml`) run from the scratchpad, not checked into this repo. If more `.docx` files show up, either write the same kind of script again or ask the user to install `pandoc`.
-- Node v24.13.1, npm 11.8.0, Shopify CLI 4.7.0, `shopify-ai-toolkit` plugin v1.7.0 — verified 2026-08-23.
+Full detail (machine table, auth config paths, PDF-reading workaround, `.docx` conversion, screenshot mechanics) is in [`docs/ENVIRONMENT.md`](docs/ENVIRONMENT.md) — read the relevant part when doing that kind of work. The load-bearing bits:
+
+- **PowerShell is the primary shell. The Bash tool does not see the Windows PATH** — use PowerShell, or call binaries by absolute path. Until a VS Code restart, prepend `$env:PATH = "C:\Program Files\nodejs;$env:APPDATA\npm;" + $env:PATH` in PowerShell calls.
+- **`claude` CLI** (plugin/admin commands) is not on PATH — bundled at `C:\Users\Hexadrine\.vscode\extensions\anthropic.claude-code-<version>-win32-x64\resources\native-binary\claude.exe`.
+- **`git push` fails from Claude's shells** (no stored GitHub credential, GCM can't prompt) — the user runs `git push` once in their own terminal, then Claude's pushes work.
+- **Run setup/auth/CLI/install/commit commands yourself** — don't hand the user a checklist. Only `shopify auth login` (first-time) and the first `git push` genuinely need them. (Memory: [[run-setup-commands-yourself]].)
+- `shopify-plugin@shopify-ai-toolkit` v1.8.0 is installed (user scope). Its 22 skills are picked up next session/restart.
+
+## Token discipline
+
+Keep context small — it's re-sent every turn. None of this trades away output quality; it removes waste.
+
+- **Search, don't sweep.** Use `Grep`/`Glob` to locate; `Read` only the specific files/line ranges you need. Never read `node_modules/`, lockfiles, `.min.js`/`.map`, build output, or a whole directory "to get oriented." `.claude/settings.json` denies the worst offenders, but judgment still applies.
+- **Name the files.** Prefer "edit `theme-elixir/sections/x.liquid`" over "look at the theme." Most tasks touch 2–3 files.
+- **Delegate verbose work to a subagent** (`Task`) — multi-file exploration, log/output grinding, doc research. The bulky output stays in the subagent; only its conclusion returns. Use `model: haiku` for mechanical subagent tasks (renames, lookups, formatting).
+- **`shopify-plugin` skills — use the in-scope ones only.** Relevant here: `shopify-admin`, `shopify-liquid`, `shopify-storefront-graphql`, `shopify-shopifyql`, `shopify-use-shopify-cli`, `shopify-custom-data`, `shopify-dev`. Do **not** invoke `shopify-hydrogen` (~58k tok on invoke), `shopify-pos-ui`, `shopify-functions`, or the `shopify-polaris-*` / `shopify-app-*` skills — not used on this project.
+- **`/clear` between unrelated tasks; `/compact` when a session gets long.** A one-line question in a day-old session still re-bills the whole history.
+- Reserve extended thinking / Opus for genuinely hard multi-step work; routine edits don't need them.
+- MCP connectors (Canva, Gethookd, Gmail, Calendar, Klaviyo, Notion, Pipeboard, Stripe, Drive) each add always-on overhead. Only Higgsfield has been used here (placeholder image gen). Disabling the unused ones in claude.ai connector settings is a standing win — user action, flagged 2026-09-09.
 
 ## Frontend / visual verification workflow
 
-Applies once theme work starts (no theme exists yet — see "Session objectives"). Adapted from a screenshot-driven QA workflow used on a prior project; the mechanics differ because this is a Shopify theme, not a static HTML file.
+Screenshot mechanics are in [`docs/ENVIRONMENT.md`](docs/ENVIRONMENT.md#screenshot-workflow-mechanics). The rules:
 
-- **Invoke the `frontend-design` skill** before writing or restyling any theme section/template, every session, no exceptions — it's the guidance for aesthetic direction and avoiding templated-default choices. Pull in the relevant `shopify-plugin:shopify-liquid` skill for Liquid-specific correctness.
-- **Always preview from a live server, never a static file.** Use `shopify theme dev --store gcvy0q-cb.myshopify.com --theme <motithera-draft-theme-id>` (Shopify's live-reload preview, default `http://127.0.0.1:9292`) — this is the Shopify-theme equivalent of Flove's `node serve.mjs`. Start it in the background before taking screenshots; don't start a second instance if one's already running.
-- **Screenshot workflow — installed and working as of 2026-08-23:**
-  - Puppeteer is a **local project dependency** (`npm install puppeteer` ran in project root — see `package.json` / `node_modules/`, not global). Its bundled Chrome lives in the normal cache at `~/.cache/puppeteer/` (`chrome/`, `chrome-headless-shell/`).
-  - `screenshot.mjs` (project root) is the runner: `node screenshot.mjs <url> [label]`. Smoke-tested against `https://example.com` — works end-to-end.
-  - Saves to `./temporary screenshots/screenshot-N[-label].png` (git-ignored via `.gitignore`), auto-incrementing, never overwriting.
-  - Point it at the `shopify theme dev` live-reload URL once that's running. After screenshotting, read the PNG with the `Read` tool and analyze it directly — don't just trust the Liquid diff.
-  - Note: an earlier attempt installed Puppeteer **globally** and tried `NODE_PATH` to make a plain `node screenshot.mjs` find it — that doesn't work, Node's ESM resolver ignores `NODE_PATH`. Fixed by doing a normal local install instead (`npm init -y` + `npm install puppeteer` in project root) and removing the global copy. If Puppeteer ever seems "missing" despite being installed, check it's the local copy being resolved, not a global one.
-- **Do at least 2 comparison rounds** (before/after, or against the swipe file in `swipe/`) per visual change. Stop only when no visible differences remain against intent.
+- **Invoke the `frontend-design` skill** before writing or restyling any theme section/template, every session, no exceptions. Pull in `shopify-plugin:shopify-liquid` for Liquid correctness.
+- **Always preview from a live server, never a static file:** `shopify theme dev --store gcvy0q-cb.myshopify.com --theme 163622060290` (live-reload, default `http://127.0.0.1:9292`). Start it in the background before screenshotting; don't start a second instance if one's running.
+- **Capture with `node screenshot.mjs <url> [label]`** → saves to `./temporary screenshots/`. `Read` the PNG and analyze it directly — don't just trust the Liquid diff.
+- **Do at least 2 comparison rounds** per visual change (before/after, or against `swipe/`). Stop only when no visible differences remain against intent.
 
 ## Design system guardrails
 
@@ -118,7 +122,9 @@ The guide's example copy is deliberately spec-accurate (heat/pulse/red-light, no
 ## File layout
 
 ```
-CLAUDE.md              this file
+CLAUDE.md              this file — always-loaded; keep it lean (see "Token discipline")
+docs/ENVIRONMENT.md    situational tooling/auth/PDF/screenshot detail (not always-loaded)
+.claude/settings.json  project settings — Read deny-list for build noise (token hygiene)
 SHOPIFY_BOOTSTRAP.md    reusable environment-setup runbook (generic, not MotiThera-specific)
 README.md               project index
 PROGRESS.md             audit log of every store mutation / meaningful file change
@@ -129,7 +135,8 @@ offer/                   offer brief, funnel/positioning strategy
 research/                market research & voice-of-customer dossier
 sourcing/                Alibaba supplier screenshots — read before finalizing product specs
 swipe/                   competitor landing pages to swipe structure/format from (Kineon)
-theme/                   (not created yet — added once a theme is duplicated for MotiThera)
+theme-elixir/            ACTIVE MotiThera theme working copy (theme id 163622060290)
+theme/                   superseded Horizon attempt — reference only, don't work in it
 docs/superpowers/specs/ design specs (e.g. the product presell/PDP page design, 2026-08-24)
 screenshot.mjs           Puppeteer screenshot runner — node screenshot.mjs <url> [label]
 package.json / node_modules/  local Puppeteer install (npm install puppeteer already run)
@@ -157,3 +164,7 @@ Full mutation log for this whole build: `PROGRESS.md`, 2026-08-24 entry.
 ## Notes
 
 - Store-specific schema details (custom metafields, product types, collection structure, etc.) get captured in Claude's memory as they're discovered, not duplicated here.
+
+## Compact instructions
+
+When compacting, preserve: (1) every unlogged store mutation and its result, so it can still be written to `PROGRESS.md`; (2) the active theme id (`163622060290`) and which local folder is live (`theme-elixir/`); (3) auth/tooling state changes; (4) any `[VERIFY]` claim that got confirmed or rejected this session; (5) the current task's decisions and open threads. Drop: file contents already read, tool-call transcripts, superseded drafts.
