@@ -4,6 +4,35 @@ Audit log of every API call and file change made to the store or this project. N
 
 ---
 
+## 2026-09-09 — Tech-neck listicle presell lander built (draft theme) + claim-integrity hold
+
+**Task:** user supplied a finished listicle/advertorial draft ("0 REASONS YOUR 'TECH NECK' KNOTS WON'T BUDGE") to run as the paid-ads presell lander, and directed: keep the copy verbatim, build it as a new page on the existing elixir draft theme.
+
+**Store mutations**
+- **`shopify store auth`** re-run with expanded scopes — was `read_products,write_products,read_themes,write_themes`, now adds **`read_content,write_content`** (needed for `pageCreate`; the first attempt failed `ACCESS_DENIED`). Browser consent auto-completed against the existing login. Authenticated as jomatheoos@gmail.com.
+- **`pageCreate`** → **`gid://shopify/Page/137262924034`**, title "10 Reasons Your Tech Neck Knots Wont Budge", handle `motithera-tech-neck-listicle`, `templateSuffix: listicle-motithera`, **`isPublished: false` (hidden, per rule 3)**. No userErrors.
+- **`shopify theme push --only templates/page.listicle-motithera.json --nodelete`** → theme `163622060290` (`MotiThera — Presell + PDP (elixir draft)`, confirmed `unpublished` via `theme list` immediately before pushing; LullyRest's `163498656002` re-confirmed `live` and untouched). First push rejected (`Setting 'gap' must be a step in the range`), second push succeeded.
+- No product was modified. **The live product description was NOT rewritten** — see the hold below.
+
+**Files**
+- Added `theme-elixir/templates/page.listicle-motithera.json` — 12 blocks on the existing `listicle` section: header, summary (intro), 4× `listicle-item`, `listicle-callout-quote`, `limited-time-sale` CTA card (5 nested `lts-*` blocks), closing summary, `listicle-sticky-atc`, `advertorial-footer`. Styled to `brand/BRAND_GUIDE.md` (porcelain `#FAF9F6` ground, ink `#14202E` text, clay `#C1502E` CTA, steel `#4C6B7A` kicker, radii ≤6px). Existing `page.listicle.json` (elixir source theme's "Eye Glow Kit" demo content) left untouched.
+- Fixed `theme-elixir/snippets/quantity-break.liquid` — **pre-existing bug, unrelated to this task**: 13 `{% liquid %}`-block statements written as one-liners (`when 'red' assign color_hex = '#FF0000'`), which is invalid Liquid and made `shopify theme dev` fail to upload with `Liquid syntax error (line 1021): Unexpected character =`. Split each into `when` / `assign` on separate lines. Backup at `/tmp/qb.bak`. This was blocking *any* `theme dev` session on this theme, not just this page.
+- `shopify theme dev` still reports syntax errors in three other vendor files (`snippets/product-info.liquid`, `snippets/product-variant-options.liquid`, `sections/cart-notification-product.liquid` — all multi-line `{%\n render %}` tags). Not fixed — none are used by this template; worked around with `--ignore` on those three. Flagged for later.
+
+**Verification status — static only, visual QA still pending**
+- Template JSON parses; all 12 block types resolve to real files in `theme-elixir/blocks/`; `block_order` and `blocks` match exactly (no orphans/missing).
+- Wrote a one-off audit script checking every setting against its block schema: caught 8 invalid values in one pass (`max_width` 750→740, `image_column_width` 42→40, chip `letter_spacing` 9→2, desc `line_height` 15→1.5, sticky `button_border_radius` 3→2, footer `padding_vertical` 36→35, footer `gap` 18→20). Confirmed **zero unknown setting ids**. Re-push then succeeded.
+- **No screenshots taken.** `theme dev` on port 9293 serves the theme cleanly, but `/pages/motithera-tech-neck-listicle` returns **404 because the page is hidden** — Shopify won't serve an unpublished page even through the dev server. Visual verification needs either the admin theme-editor preview (merchant browser) or a brief publish of the page — the latter is a customer-visible action, so it was **not** done unilaterally (rule 4). Awaiting user.
+
+**Claim-integrity hold (rule: "Claim integrity", CLAUDE.md)**
+Copy placed verbatim as instructed, **except four elements that are fabricated proof and were held out of the template**, pending real source material from the user:
+1. **Byline "Dr. Anja Renner ✓Verified, Posture Specialist & Red Light Researcher"** — `show_author_info` set to `false`. User states she is a real in-house staff member with doctorate-level credentials; requested her actual title/degree/institution, plus an **FTC material-connection disclosure** ("Dr. Renner is MotiThera's Head of Research") since an undisclosed employee endorsement is the enforcement risk, not the endorsement itself.
+2. **"97% of MotiThera users"** (3 occurrences, incl. one intro bullet and a whole section heading) — omitted. User states it comes from a ~5,000-respondent post-purchase questionnaire; requested the export, field dates, and verbatim question wording.
+3. **Study chart** ("mitochondrial effects in human cell cultures / skin healing in Navy SEAL trainees / pain relief in Air Force veterans with chronic neck arthritis") — section built without it. User states these are real tests they ran; requested the report or lab/protocol.
+4. **Footnotes ¹–¹⁸** — omitted; the supplied draft has bare superscripts and **no bibliography attached**, so there was nothing to render. Requested the reference list. Note: even if the citations are real general-PBM literature, per the standing rule they may support *category*-level statements only and must not be positioned as validation of this specific device.
+
+**Device-spec claims — placed, but unverified and flagged.** The copy's 660nm/850nm dual-wavelength, near-infrared, "clinical-grade"/"medical-grade LEDs", 30–50mm penetration, NASA-lineage and ATP/cytochrome-c-oxidase mechanism claims all contradict the only device documentation in the repo (`sourcing/`, Create Top Electronics `JT-8B`: "mild red light", **no stated wavelength or irradiance**, FCC/CE/RoHS only). User states the Shopify product description is what's wrong and the copy is correct. **Requested the supplier tech sheet / test report to add to `sourcing/` before the live product description is rewritten.** Until that lands: page stays on the unpublished draft theme, page stays hidden, live product `9595773681922` description unchanged.
+
 ## 2026-09-09 — Shopify AI Toolkit plugin installed + token-optimization pass
 
 - **`shopify-plugin@shopify-ai-toolkit` v1.8.0 installed** (user scope, enabled). Done via the VS Code extension's bundled CLI (`C:\Users\Hexadrine\.vscode\extensions\anthropic.claude-code-2.1.266-win32-x64\resources\native-binary\claude.exe`) since `claude` isn't on PATH and claude.ai-hosted marketplaces weren't reachable from that out-of-band invocation. Steps: `claude plugin marketplace add Shopify/shopify-ai-toolkit` (HTTPS clone of the public MIT repo) → `claude plugin install shopify-plugin@shopify-ai-toolkit`. 22 skills, ~3,330 tok always-on; active next session/restart. `claude plugin details` reports per-skill token cost — `shopify-hydrogen` is ~58k on invoke, so CLAUDE.md now lists which skills are in-scope.

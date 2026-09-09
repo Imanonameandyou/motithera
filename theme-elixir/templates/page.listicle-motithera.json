@@ -1,0 +1,300 @@
+{
+  "sections": {
+    "listicle_motithera": {
+      "type": "listicle",
+      "blocks": {
+        "header_main": {
+          "type": "listicle-header",
+          "settings": {
+            "title": "0 REASONS YOUR \"TECH NECK\" KNOTS WON'T BUDGE (AND HOW RED LIGHT BREAKS THE LOOP)",
+            "title_size": 44,
+            "title_size_mobile": 30,
+            "alignment": "left",
+            "show_author_info": false,
+            "author_name": "",
+            "author_date": "Last Updated September 9, 2026",
+            "avatar_size": 50,
+            "margin_bottom": 28
+          }
+        },
+        "summary_intro": {
+          "type": "listicle-summary",
+          "settings": {
+            "content": "<p>Raise your hand if this sounds familiar:</p><p>It's 4:45 pm. You've been grinding at your desk since morning.</p><p>You roll your shoulders back, hoping for some relief. But instead of relaxing, the knots in your traps feel tighter than ever.</p><p>They're like rocks shoved under your skin. Hard, painful lumps that never seem to go away — no matter how many heating pads or massage balls you throw at them.</p><p>If you're nodding along right now (and wincing a little), you're not alone.</p><p>Those stubborn knots have a medical name: <strong>\"Cinderella Syndrome.\"</strong></p><p>And they're not just a nuisance. They're a sign that your muscle cells are stuck in a vicious loop — one that conventional remedies can't break.</p><p>But there's good news:</p><p>Cutting-edge red light technology, originally developed by NASA for astronauts, is now revealing a new way to release chronic neck tension.</p><p>One that doesn't just mask the pain. But recharges your muscle cells from the inside out.</p><p><strong>In this article, you'll learn:</strong></p><ul><li>Why your knots aren't a posture problem (and what's really strangling your neck)</li><li>The energy crisis that turns shoulder muscles into \"concrete bricks\"</li><li>How heating pads and massage guns make tension worse over time</li><li>Why targeted red light succeeds where other remedies fail</li><li>How the MotiThera Neck Wrap \"jump-starts\" your muscle batteries in 15 minutes flat</li></ul><p>By the time you're done reading, you'll know exactly how to melt the deepest knots — so you can kiss that \"tech neck\" goodbye.</p><p>Sound good? Let's dive in.</p>",
+            "enable_highlight": false,
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "margin_bottom": 28
+          }
+        },
+        "item_knots": {
+          "type": "listicle-item",
+          "settings": {
+            "desktop_layout": "stacked",
+            "title": "THOSE ROCK-HARD KNOTS AREN'T CAUSED BY BAD POSTURE — THEY'RE A SIGN OF STARVING MUSCLE CELLS",
+            "content": "<p>First, let's get one thing straight:</p><p>Your tight traps aren't a moral failure.</p><p>They're not a discipline problem. Or a \"slouching at my desk\" problem.</p><p>They're an energy crisis happening inside your muscle cells.</p><p>Here's how it works:</p><p>When you hunch over your laptop, phone, or Zoom calls all day, the weight of your head puts up to 60 pounds of force on your neck.</p><p>That's like carrying an 8-year-old piggyback. For 8 hours straight.</p><p>To stop your skull from crushing your spine, the muscles in your neck and shoulders have to clench up and hold on for dear life.</p><p>But that constant clenching comes with a cost:</p><p>It literally strangles the tiny blood vessels that supply oxygen to your <strong>\"Cinderella\" muscle fibers</strong> — the ones that work overtime to keep your head up.</p><p>Cut off from fresh blood, those fibers run out of fuel and get stuck in a state of constant contraction.</p><p>Doctors call this <strong>\"cellular rigor\"</strong> — like rigor mortis, but for living muscle tissue.</p><p>Instead of relaxing when you tell them to, your depleted Cinderella fibers just freeze up and form dense, painful lumps.</p><p>We're talking true, can't-even-wiggle-em rockiness here. Not just \"wow, I'm stiff today\" tightness.</p><p>And it all starts with your muscle cells running on empty.</p>",
+            "highlight_text": "",
+            "enable_container": false,
+            "margin_bottom": 8
+          }
+        },
+        "item_surface_fixes": {
+          "type": "listicle-item",
+          "settings": {
+            "desktop_layout": "stacked",
+            "title": "SURFACE FIXES LIKE HEATING PADS & MASSAGE GUNS ONLY MAKE \"CINDERELLA SYNDROME\" WORSE",
+            "content": "<p>Now, if you're like most people who work a desk job, you've probably tried every trick in the book to loosen up those knots:</p><p>Hot showers. Lacrosse balls. Tiger Balm. Foam rollers. Theraguns jackhammering away at your traps.</p><p>Sometimes they bring temporary relief. But a few hours later — or the next morning — the rocks are back. And they're just as hard as ever.</p><p>Sound familiar?</p><p>Here's why those quick fixes never seem to stick:</p><ul><li><strong>Heating pads</strong> only warm up the surface of your skin (about 1-3 mm deep). They can't reach the suffocated muscle fibers underneath.</li><li><strong>Massage guns</strong> just pummel the top layers of tissue. 30-50 mm below the surface, your Cinderella cells stay choked off and tense.</li><li><strong>Menthol creams</strong> might make your skin tingle. But that's just distracting your nerves — not refilling your muscle batteries.</li></ul>",
+            "highlight_text": "",
+            "enable_container": false,
+            "margin_bottom": 8
+          }
+        },
+        "quote_icyhot": {
+          "type": "listicle-callout-quote",
+          "settings": {
+            "content": "<p>It's like rubbing IcyHot on a car hood and expecting the engine to magically turn over. Sure, the metal might feel warm for a minute. But under the surface? That battery is still stone-cold dead.</p>",
+            "bg_color": "#EEF2F3",
+            "accent_color": "#C1502E",
+            "text_color": "#14202E",
+            "font_size": 18,
+            "font_size_mobile": 16,
+            "font_weight": "400",
+            "font_italic": true,
+            "border_width": 3,
+            "padding_y": 20,
+            "padding_x": 24
+          }
+        },
+        "item_nasa": {
+          "type": "listicle-item",
+          "settings": {
+            "desktop_layout": "stacked",
+            "title": "NASA-BACKED RED LIGHT RESEARCH SHOWS HOW TO \"ENERGIZE\" WORN-OUT MUSCLE CELLS ON COMMAND",
+            "content": "<p>If you really want to break the \"Cinderella cycle,\" you need a way to jump-start your muscle cells' stalled-out energy factories — the mitochondria.</p><p>And that's where red light therapy comes in.</p><p>Back in the 1990s, NASA had a problem:</p><p>Astronauts' muscles were wasting away in zero gravity.</p><p>Without the steady pull of Earth's gravitational field, their mitochondria struggled to make energy. Muscle fibers shriveled up. Recovery from basic exercise slowed to a snail's pace.</p><p>The solution?</p><p>High-powered LED arrays that blast precise wavelengths of red and near-infrared light (660 &amp; 850 nanometers) at the body.</p><p>When those wavelengths soak into worn-out muscle tissue, magic happens:</p><p>The light particles (photons) bump into an enzyme called cytochrome c oxidase — the \"battery pack\" that powers your mitochondria.</p><p>This enzyme gets clogged up by stress hormones when your muscles are exhausted and starved for oxygen.</p><p>But the photons jostle it back into action — like a biochemical jumper cable.</p><p>Suddenly, your mitochondria kick into overdrive, cranking out fresh cellular energy (ATP) to help your muscle fibers finally relax and slide past each other again.</p><p>At the same time, the energized mitochondria start to suck up all the lactic acid, free radicals, and other waste products that get trapped when your circulation stalls out.</p><p>In other words:</p><p><strong>Red light doesn't just juice up your muscle batteries. It takes out the trash too.</strong></p><p>Think of it like power washing all the gunk out of an old fuel line.</p><p>Your Cinderella fibers go from smoggy and sludge-clogged to crystal-clear and humming with energy.</p><p>The best part?</p><p>You don't have to spend months at the International Space Station to get the benefits.</p>",
+            "highlight_text": "",
+            "enable_container": false,
+            "margin_bottom": 8
+          }
+        },
+        "item_product": {
+          "type": "listicle-item",
+          "settings": {
+            "desktop_layout": "stacked",
+            "image": "shopify://shop_images/hf_20260823_111628_da877241-0eca-451e-a2d0-6dd161fbcaa8.png",
+            "title": "THE MOTITHERA NECK WRAP USES NASA TECH TO RELEASE DEEP KNOTS IN JUST 15 MINUTES A DAY",
+            "content": "<p>The MotiThera is the first at-home device to bring clinical-grade red light therapy to the exact muscles that need it most:</p><p>Your strained-out traps, neck extensors, and rotator cuff fibers.</p><p>Think of it like a silk scarf that hugs every curve and contour of your shoulders — except it's lined with medical-grade LEDs calibrated to the same specs used in NASA's anti-atrophy research.</p><p>When you power it on and drape it around your neck, those LEDs bathe your \"Cinderella tissues\" with a rejuvenating mix of deep red (660 nm) and near-infrared (850 nm) light.</p><p>The deep red wavelengths sink into your skin and fascia, boosting blood flow and flushing out inflammatory chemicals.</p><p>And the near-infrared wavelengths? They shoot straight through your skin, penetrating 30-50 mm to hit your muscle mitochondria where they live.</p><p>That's the sweet spot for busting up chronically hard and painful knots — the ones that feel like bone spurs under your fingers.</p><p>Best of all, the MotiThera runs on a rechargeable lithium battery.</p><p>So you can get your dose of therapeutic red light without being chained to a wall outlet or dragging a clunky panel everywhere you go.</p><p>Just pop it on for 15 minutes while you're winding down at night, and let the photons work their magic.</p>",
+            "highlight_text": "",
+            "enable_container": false,
+            "margin_bottom": 8
+          }
+        },
+        "item_not_a_fad": {
+          "type": "listicle-item",
+          "settings": {
+            "desktop_layout": "stacked",
+            "title": "THIS ISN'T JUST ANOTHER WELLNESS FAD — IT'S GROUNDED IN DECADES OF NASA RESEARCH",
+            "content": "<p>If red light therapy was some fly-by-night gimmick, NASA wouldn't have spent 25+ years and untold millions of dollars proving that it works.</p><p>We're talking rigorous, peer-reviewed, published-in-medical-journals proof here — not essential oil hand-waving.</p><p>Red and near-infrared wavelengths are to locked-up muscle knots what a defibrillator is to a stopped heart — a way to hit the \"reset\" button on your cells' stalled-out energy factories.</p><p>So when you're staring down another night of feeling like a human paperclip, you have a choice:</p><p>You can keep rubbing IcyHot on a dead battery and hoping things magically get better on their own...</p><p>Or you can trust in decades of aerospace medicine research and give your muscle cells the jump-start they're begging for.</p><p>If you're ready to stop settling for surface-level fixes and get some real, lasting relief, click the button below to check out the MotiThera Neck Wrap:</p>",
+            "highlight_text": "",
+            "enable_container": false,
+            "margin_bottom": 8
+          }
+        },
+        "cta_card": {
+          "type": "limited-time-sale",
+          "settings": {
+            "max_width": 740,
+            "image_column_width": 40,
+            "vertical_align": "center",
+            "content_align": "left",
+            "section_bg_color": "#FAF9F6",
+            "card_bg_color": "#EEF2F3",
+            "media_bg_color": "#EEF2F3",
+            "border_style": "solid",
+            "border_width": 1,
+            "border_color": "#DCE3E6",
+            "border_radius": 6,
+            "fallback_image": "shopify://shop_images/hf_20260823_111629_8f1eca09-48c3-4872-a4d2-d7451884ec30.png",
+            "fallback_object_fit": "cover",
+            "media_min_height": 340,
+            "content_padding_top": 32,
+            "content_padding_bottom": 32,
+            "content_padding_x": 32,
+            "margin_top": 32,
+            "margin_bottom": 32
+          },
+          "blocks": {
+            "cta_chip": {
+              "type": "lts-chip",
+              "settings": {
+                "text": "HEAT · PULSE · RED LIGHT",
+                "bg_color": "#DCE9EC",
+                "text_color": "#38505C",
+                "font_size": 12,
+                "font_weight": "600",
+                "letter_spacing": 2,
+                "border_radius": 2,
+                "padding_y": 6,
+                "padding_x": 10
+              }
+            },
+            "cta_headline": {
+              "type": "lts-headline",
+              "settings": {
+                "headline_accent": "MotiThera Neck Relax",
+                "headline_strong": "",
+                "heading_tag": "h2",
+                "headline_color": "#14202E",
+                "accent_color": "#14202E",
+                "headline_font_size": 30,
+                "headline_font_size_mobile": 24,
+                "headline_font_weight": "800",
+                "show_dots": false
+              }
+            },
+            "cta_desc": {
+              "type": "lts-description",
+              "settings": {
+                "text": "Wireless, hands-free relief for the tension a desk-bound day leaves behind.",
+                "text_color": "#3C4753",
+                "font_size": 17,
+                "font_size_mobile": 16,
+                "line_height": 1.5,
+                "text_align": "left",
+                "margin_bottom": 20
+              }
+            },
+            "cta_button": {
+              "type": "lts-button",
+              "settings": {
+                "text": "CHECK AVAILABILITY",
+                "link": "/products/motithera-neck-relax-heat-pulse-red-light-massager",
+                "font_size": 15,
+                "font_weight": "600",
+                "letter_spacing": 2,
+                "text_transform": "uppercase",
+                "use_gradient": false,
+                "bg_color": "#C1502E",
+                "text_color": "#FAF9F6",
+                "hover_bg_color": "#A43F22",
+                "hover_text_color": "#FAF9F6",
+                "border_width": 0,
+                "border_radius": 3,
+                "padding_y": 16
+              }
+            },
+            "cta_guarantee": {
+              "type": "lts-guarantee",
+              "settings": {
+                "text": "60-day money-back guarantee with prepaid return shipping · 1-year hardware warranty",
+                "text_color": "#5B6672",
+                "font_size": 13,
+                "font_weight": "400",
+                "text_align": "left",
+                "margin_bottom": 0
+              }
+            }
+          },
+          "block_order": [
+            "cta_chip",
+            "cta_headline",
+            "cta_desc",
+            "cta_button",
+            "cta_guarantee"
+          ]
+        },
+        "closing_note": {
+          "type": "listicle-summary",
+          "settings": {
+            "content": "<p>Your shoulders will thank you. Your performance at work will thank you.</p><p>And most importantly?</p><p>Your loved ones will thank you — for showing up as the relaxed, present, patient partner and parent they deserve.</p><p>Even if you do still sneak in a few minutes of doomscrolling after the kids go to bed. 😉</p>",
+            "enable_highlight": false,
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "margin_top": 8,
+            "margin_bottom": 24
+          }
+        },
+        "sticky_atc": {
+          "type": "listicle-sticky-atc",
+          "settings": {
+            "button_text": "CHECK AVAILABILITY",
+            "button_link": "/products/motithera-neck-relax-heat-pulse-red-light-massager",
+            "button_bg": "#C1502E",
+            "button_text_color": "#FAF9F6",
+            "button_font_size": 16,
+            "button_font_size_mobile": 15,
+            "button_padding_y": 18,
+            "button_padding_x": 40,
+            "button_border_radius": 2,
+            "show_subtext": true,
+            "subtext": "60-DAY MONEY-BACK GUARANTEE · 1-YEAR WARRANTY",
+            "subtext_color": "#5B6672",
+            "subtext_font_size": 12,
+            "max_width": 600
+          }
+        },
+        "footer": {
+          "type": "advertorial-footer",
+          "settings": {
+            "disclaimer_text": "MotiThera Neck Relax is a personal wellness device. It is not a medical device and is not intended to diagnose, treat, cure, or prevent any disease. Consult a physician before use if you are pregnant, have a pacemaker or other implanted electronic device, or have a diagnosed cervical spine condition. Individual results vary.",
+            "disclaimer_font_size": 13,
+            "disclaimer_line_height": "1.5",
+            "disclaimer_alignment": "left",
+            "disclaimer_opacity": 0.9,
+            "copyright_text": "© 2026 MotiThera. All rights reserved.",
+            "copyright_font_size": 12,
+            "copyright_opacity": 0.8,
+            "show_links": true,
+            "terms_text": "Terms of Service",
+            "privacy_text": "Privacy Policy",
+            "link_font_size": 12,
+            "links_gap": 10,
+            "background_color": "#EEF2F3",
+            "text_color": "#3C4753",
+            "link_color": "#4C6B7A",
+            "link_hover_color": "#38505C",
+            "link_decoration": "none",
+            "link_hover_decoration": "underline",
+            "max_width": 750,
+            "padding_vertical": 35,
+            "padding_horizontal": 30,
+            "gap": 20,
+            "bottom_layout": "row",
+            "bottom_alignment": "center",
+            "bottom_justify": "space-between"
+          }
+        }
+      },
+      "block_order": [
+        "header_main",
+        "summary_intro",
+        "item_knots",
+        "item_surface_fixes",
+        "quote_icyhot",
+        "item_nasa",
+        "item_product",
+        "item_not_a_fad",
+        "cta_card",
+        "closing_note",
+        "sticky_atc",
+        "footer"
+      ],
+      "name": "Listicle — MotiThera Tech Neck",
+      "settings": {
+        "section_max_width": 750,
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "gap": 20,
+        "use_custom_font": false,
+        "use_theme_colors": false,
+        "disable_scroll_animation": true,
+        "section_background_color": "#FAF9F6",
+        "section_text_color": "#14202E",
+        "container_padding_horizontal": 40,
+        "mobile_container_padding": 20
+      }
+    }
+  },
+  "order": [
+    "listicle_motithera"
+  ]
+}
