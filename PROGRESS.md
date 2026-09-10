@@ -4,6 +4,57 @@ Audit log of every API call and file change made to the store or this project. N
 
 ---
 
+## 2026-09-10 — Default product template rewritten for MotiThera (PDP finished)
+
+**Task:** finish the product page — keep the *default* product template's structure (`templates/product.json`, the one product `9595773681922` actually resolves to, `templateSuffix: null`), swap copy and imagery to MotiThera, written for a reader arriving from the tech-neck listicle.
+
+**Store mutations**
+- **`shopify store execute`** (reads only) — `product(id: 9595773681922)` for variants/media; `files(query: "motithera")` and `files(query: "neck")` to confirm which `shopify://shop_images/` handles actually exist. No writes to any product, page, or discount.
+- **`shopify theme push --only templates/product.json --force`** → theme `163622060290` (`MotiThera — Presell + PDP (elixir draft)`, unpublished). Pushed 4×: 2 rejected by schema validation (`table_column_width` >50; `swatch_border_radius` not on a valid step), then succeeded. LullyRest's live theme `163498656002` untouched.
+- **Nothing published.** Theme stays unpublished; product status/visibility unchanged from what the 2026-08-24 session left (ACTIVE + on Online Store — still not rule-3 state, still flagged).
+
+**Files**
+- Rewrote `theme-elixir/templates/product.json` (the only changed file). Section *order and structure preserved* as instructed — every change is a settings value, a `disabled` flag, or a palette remap.
+
+**Copy — written against the listicle's exit state, not from scratch**
+Reader arrives already believing the Cinderella/tech-neck mechanism and that heating pads and massage guns fail. So the PDP does not re-teach it; it answers *what exactly do I get, why not the drawer fix, and what's my risk*:
+- Buy box: spec line ("Heat · 4-node vibration · Pulse modes · Red light" + "One wireless wrap. Nothing to hold, no cord to the wall, no appointment to book."), `ADD TO CART`, real guarantee badges (60-day money-back / 1-year hardware warranty), and the ex-"cheap replicas" block repurposed into the belief-4 point (flat panels/rigid belts can't hold contact across the slope of the neck).
+- Product accordion: Description / How to use (3 steps, ~15 min) / Features (42°C heat, 4-node vibration, low-frequency pulse, soft red light, USB-C, FCC-CE-RoHS) / **Safety & precautions** (not a medical device; pregnancy, pacemaker, diagnosed cervical spine condition) / Shipping & Returns.
+- Benefits grid: the four modalities in avatar language ("where the coat-hanger ache lives", "instead of gritting through it").
+- Comparison table reframed from "Us vs. knock-offs" to **"Why Not Just Another Heating Pad?"** vs "The Usual Fixes (pads, guns, appointments)" — 4 structural rows + "What it costs over time: One-time / Ongoing".
+- Guarantee section + bottom FAQ (session length, payments, daily-use safety, what-if-it-doesn't-work) all on confirmed-real terms only.
+
+**Claim integrity — sections held open rather than faked** (CLAUDE.md standing rule)
+Disabled, not deleted, so they can be switched on the day real material exists:
+- Sections: `before_after_comparison` (no real before/after imagery), `customer_reviews` (heading was "Rated 4.8/5 by 1,000+" over 4 stock images), `customer_reviews_carousel` (4 lorem-ipsum reviews, "Rated 4.8/5 based on +10,839 Total Ratings").
+- Blocks in `main`: `trustpilot_rating` ("Excellent 4.7 out of 5"), `number_one_award` ("#1 BESTSELLER OF 2024"), `video_carousel_standalone` ("Over __M Views On Instagram"), `customer_review` ("Lauren J."), plus `money_back_guarantee` (its "Less than 1% of customers claim…" stat was invented, and its fallback badge icon rendered as a broken image).
+- Also disabled as inapplicable, not as claims: `simple_variant_picker` + both "Choose Your…" labels + `quantity_break` (single "Default Title" variant; the quantity tiers were LullyRest's pillow BOGO with pillow photography), and 4 empty `carousel_default_video` blocks.
+- `sticky_add_to_cart` rating line "Excellent 4.8 | 1319 reviews" → "60-day money-back guarantee · 1-year warranty".
+- Shipping transit times removed from the FAQ (the inherited "3-5 business days continental US" is not verified) — replaced with "You will receive tracking by email as soon as your order ships." **Needs the user's real fulfilment numbers to say more.**
+
+**Listicle ↔ PDP mismatch — unchanged, still on hold.** The published listicle sells 660nm/850nm, "clinical-grade"/"medical-grade LEDs" and the NASA lineage; the PDP describes the red light as "a gentle red glow that runs alongside the heat and the massage." That gap is deliberate: `sourcing/` still contains only the Alibaba `JT-8B` capture ("mild red light", no wavelength or irradiance, FCC/CE/RoHS), and the supplier tech sheet requested on 2026-09-09 has not landed. If it arrives and confirms the wavelengths, the PDP is a one-setting change (`product_benefits` benefit 4 + FAQ "Features"). Verified by fetching the rendered page: no "660", "850", "medical-grade", "clinical-grade" or "NASA" appears in visible copy.
+
+**Palette — LullyRest → MotiThera, template-wide**
+Scripted remap of the inherited elixir/LullyRest palette to `brand/BRAND_GUIDE.md` tokens: `#1773b0`/`rgba(23,115,176)` → ink `#14202E`, `#83d7f9` → steel-100 `#DCE9EC`, `#e4f9ff` → mist `#EEF2F3`, `#f7fcff` → porcelain `#FAF9F6`, pink `#EF4A65`/`#FF6B9D` → clay `#C1502E`, neon `#13ff00`/`#11e100` → success `#4B7A5E`. Every `linear-gradient(...)` value collapsed to a solid token (guide forbids gradients). The 3 wavy `divider` sections disabled — they rendered as stacked grey rules, and the section background alternation already separates.
+- **Gotcha for next time:** a blanket "cap every `*radius*` at 6px" pass is rejected by the API — several radius settings have step constraints that make 6 invalid. Radii were restored to their original values except `replica_warning.border_radius` (8 → 6). Two settings also carry hard caps: `product_comparison.table_column_width` max 50.
+- Two sections were ignoring their colour settings because `use_theme_colors` / `theme_color_mode` defaulted to theme-driven: `scrolling_features_bar` needed `theme_color_mode: "custom"` (it was rendering as a full-bleed clay band; clay is the "act now" colour only) and `money_back_guarantee` needed `use_theme_colors: false`. **Check that flag first whenever a colour setting appears to have no effect on this theme.**
+
+**Imagery**
+- `product_benefits` feature image swapped from `motithera-neck-relax-detail.png` — **which does not exist in the store's files** (the presell template references it too, so that section of `product.presell.json` is rendering a broken image; not fixed here) — to `motithera-onbody-hero.png`: worn hands-free on the neck and shoulders by a woman, matching the 84%-female avatar, with the red glow and USB-C port visible.
+- Comparison column 1 thumbnail removed so both column headers sit on the same baseline.
+- Gallery still uses the 3 Higgsfield placeholders on the product record. **They show a white/orange device while the two on-body panels show a silver/black one — the product does not look like one product across the page.** Real photography, or one regenerated consistent set, is the highest-value remaining fix.
+
+**Verification — visual QA complete (3 desktop rounds + mobile)**
+- `screenshot-4` (local dev, blocked by the 3 known vendor Liquid errors — see below), `screenshot-5` round 1 remote, `screenshot-6` round 2 (identical to r1 — caught that the push had been *rejected*, not applied), `screenshot-7` round 3 after the schema fixes, `screenshot-8` mobile 390px DPR2. All in `temporary screenshots/`.
+- Re-ran the 2026-09-09 inherited-demo-defaults audit against every enabled section/block: 6 hits, all benign (an unused `after_custom_icon` SVG default; `text_value_3` "No" on 5 comparison rows, only rendered at `column_count: 3` — ours is 2). No fabricated copy leaks.
+- Fetched the rendered HTML and grepped for Trustpilot / 4.7 / 4.8 / 1319 / BESTSELLER / Lorem / pillow / "Lauren J" / "60% OFF" / 10,839 / "Verified Buyer": every remaining match is CSS class names, font hashes or asset version strings, none in visible copy.
+
+**Tooling**
+- **Puppeteer's Chrome was broken and is now repaired** — `icudtl.dat` was missing from `~/.cache/puppeteer/chrome/win64-152.0.7977.42/chrome-win64/`, so every launch failed with `Invalid file descriptor to ICU data received` (both shells; `headless:'shell'` and `pipe:true` too). `npx puppeteer browsers install chrome` was a no-op because the directory existed — fix was to **delete the version directory first, then reinstall**. First launch after reinstall times out waiting for the WS endpoint (Defender scanning the fresh binary); the second succeeds.
+- `screenshot.mjs` must be run from the repo root (it resolves `puppeteer` from `./node_modules`), and Chrome launch fails from the Bash tool — use PowerShell.
+- The 3 vendor Liquid errors flagged on 2026-09-09 (`snippets/product-info.liquid`, `snippets/product-variant-options.liquid`, `sections/cart-notification-product.liquid` — filters like `| default: 0` / `| append:` / `| escape` inside `render` arguments, which Liquid does not allow) **still break `shopify theme dev` uploads**, and `product-info.liquid` *is* on this template's path, so the local dev server renders an upload-error page for the PDP. Worked around by pushing `--only templates/product.json` and screenshotting the remote `?preview_theme_id=` preview. Still not fixed.
+
+
 ## 2026-09-09 — Tech-neck listicle presell lander built (draft theme) + claim-integrity hold
 
 **Task:** user supplied a finished listicle/advertorial draft ("0 REASONS YOUR 'TECH NECK' KNOTS WON'T BUDGE") to run as the paid-ads presell lander, and directed: keep the copy verbatim, build it as a new page on the existing elixir draft theme.
